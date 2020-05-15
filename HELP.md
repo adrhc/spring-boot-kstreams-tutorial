@@ -16,3 +16,18 @@ see http://localhost:9021/clusters
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # use {"name": "report", "parameters": ["config"]}
 ```
+### important notes
+- check pom.xml
+- check application.yml
+    - notice exception handler, threads, auto-startup
+    - topology.optimization: all 
+        - https://stackoverflow.com/questions/57164133/kafka-stream-topology-optimization
+        - https://docs.confluent.io/current/streams/developer-guide/optimizing-streams.html#optimizing-kstreams-topologies
+    - processing.guarantee: exactly_once
+        - idempotency is promised only for a *single* producer session!
+        - https://hevodata.com/blog/kafka-exactly-once/
+        - https://cwiki.apache.org/confluence/display/KAFKA/Idempotent+Producer   
+- notice `@EnableConfigurationProperties`, `Thread.sleep(Long.MAX_VALUE)`
+- notice `Command implements Serializable`
+- class `TopicsConfig`: enables topic creation
+- `infrastructure` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
