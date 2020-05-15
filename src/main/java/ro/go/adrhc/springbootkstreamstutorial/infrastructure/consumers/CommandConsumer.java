@@ -10,8 +10,9 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.
 @Component
 @Slf4j
 public class CommandConsumer {
-	@KafkaListener(id = "commandConsumer",
-			topics = "${topic.commands}", clientIdPrefix = "commandConsumer")
+	@KafkaListener(id = "commandConsumer", topics = "${topic.commands}",
+			clientIdPrefix = "commandConsumer",
+			properties = {"spring.json.value.default.type=ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command"})
 	public void consume(Command command) {
 		log.debug("\n\tcommand consumed: {}", command);
 	}

@@ -10,21 +10,13 @@ spring:
       group-id: ${spring.application.name}-consumer-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.ByteBufferDeserializer
-      value-deserializer: ro.go.adrhc.springbootkstreamstutorial.infrastructure.consumers.CommandDeserializer
-#      properties:
-#        spring:
-#          json:
-#            use:
-#              type:
-#                headers: false
-#            key:
-#              default:
-#                type: org.apache.kafka.common.utils.Bytes
-#            value:
-#              default:
-#                type: org.apache.kafka.common.utils.Bytes
-#            trusted:
-#              packages: '*'
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            key:
+              default:
+                type: org.apache.kafka.common.utils.Bytes
     streams:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       client-id: ${spring.application.name}-streamsClientId
