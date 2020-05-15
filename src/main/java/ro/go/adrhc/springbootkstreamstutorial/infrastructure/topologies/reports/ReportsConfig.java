@@ -32,7 +32,7 @@ public class ReportsConfig {
 	/**
 	 * Creating a sub/topology.
 	 */
-//	@Bean
+	@Bean
 	public KStream<byte[], Command> reportingCommands(StreamsBuilder streamsBuilder) {
 		KStream<byte[], Command> commands = commandsStream(streamsBuilder);
 		commands.foreach((k, c) -> {

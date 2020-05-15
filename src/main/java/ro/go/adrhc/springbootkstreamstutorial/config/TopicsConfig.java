@@ -8,7 +8,7 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.config.TopicBuilder;
 
 @EnableKafka
-//@EnableKafkaStreams
+@EnableKafkaStreams
 @Configuration
 public class TopicsConfig {
 	private final TopicsProperties properties;
