@@ -5,6 +5,26 @@ spring:
     name: sbkst
   kafka:
     bootstrap-servers: localhost:9092
+    consumer:
+      client-id: ${spring.application.name}-consumer-client-id
+      group-id: ${spring.application.name}-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.ByteBufferDeserializer
+      value-deserializer: ro.go.adrhc.springbootkstreamstutorial.infrastructure.consumers.CommandDeserializer
+#      properties:
+#        spring:
+#          json:
+#            use:
+#              type:
+#                headers: false
+#            key:
+#              default:
+#                type: org.apache.kafka.common.utils.Bytes
+#            value:
+#              default:
+#                type: org.apache.kafka.common.utils.Bytes
+#            trusted:
+#              packages: '*'
     streams:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       client-id: ${spring.application.name}-streamsClientId
