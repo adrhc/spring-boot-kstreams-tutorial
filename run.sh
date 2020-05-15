@@ -12,4 +12,5 @@ echo "PROFILES: $PROFILES"
 # tailf app.log | egrep -i "client1|Notification:|Overdue:|Limit:|ERROR|WARN"
 rm -fv *.log
 #./mvnw -Dspring-boot.run.profiles="$PROFILES" -Dspring-boot.run.arguments="$ARGS" spring-boot:run
-./mvnw -Dspring-boot.run.arguments="$ARGS" spring-boot:run
+#./mvnw -Dspring-boot.run.arguments="$ARGS" spring-boot:run
+./mvnw spring-boot:run
