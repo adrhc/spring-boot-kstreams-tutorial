@@ -11,12 +11,6 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.ByteBufferDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring:
-          json:
-            key:
-              default:
-                type: org.apache.kafka.common.utils.Bytes
     streams:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       client-id: ${spring.application.name}-streamsClientId
