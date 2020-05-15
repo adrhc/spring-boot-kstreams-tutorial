@@ -1,23 +1,18 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'ro.go.adrhc.spring-boot-kstreams-tutorial' is invalid and this project uses 'ro.go.adrhc.springbootkstreamstutorial' instead.
-
-# Getting Started
-
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.0.RC1/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.3.0.RC1/maven-plugin/reference/html/#build-image)
-* [Spring for Apache Kafka](https://docs.spring.io/spring-boot/docs/2.2.7.RELEASE/reference/htmlsingle/#boot-features-kafka)
-* [Apache Kafka Streams Support](https://docs.spring.io/spring-kafka/docs/current/reference/html/_reference.html#kafka-streams)
-* [Apache Kafka Streams Binding Capabilities of Spring Cloud Stream](https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#_kafka_streams_binding_capabilities_of_spring_cloud_stream)
-* [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/2.2.7.RELEASE/reference/htmlsingle/#configuration-metadata-annotation-processor)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Samples for using Apache Kafka Streams with Spring Cloud stream](https://github.com/spring-cloud/spring-cloud-stream-samples/tree/master/kafka-streams-samples)
-
+# Context
+It's about a person having a bank account with 2 cards attached: his own and one for his wife. The client wants to be notified when a daily-expenses threshold is exceeded or one related to a period (e.g. 3 days, 1 month, etc).
+# Setup
+```bash
+export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
+export PATH="$CONFLUENT_HOME/bin:$PATH"
+echo $CONFLUENT_HOME; echo $PATH
+confluent local start
+chmod -c +x *.sh
+```
+see http://localhost:9021/clusters  
+(disable browser cache)
+# commands
+```bash
+./run.sh | egrep -i "client1|command received|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
+bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+# use {"name": "report", "parameters": ["config"]}
+```
