@@ -10,9 +10,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.kafka.support.serializer.JsonSerde;
+import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
+import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
+
+import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.extend;
 
 @Configuration
 @Profile("!test")
@@ -32,19 +37,26 @@ public class ReportsConfig {
 	 * Creating a sub/topology.
 	 */
 	@Bean
-	public KStream<byte[], Command> reportingCommands(StreamsBuilder streamsBuilder) {
-		KStream<byte[], Command> commands = commandsStream(streamsBuilder);
+	public KStream<byte[], Command> reportingCommands(StreamsBuilder pStreamsBuilder) {
+		StreamsBuilderEx streamsBuilder = extend(pStreamsBuilder);
+		KStreamEx<byte[], Command> commands = commandsStream(streamsBuilder);
+		// configuration report
 		commands
 				.filter((k, cmd) -> cmd.getParameters().contains("config"))
 				.foreach((k, c) -> log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
 						env.getActiveProfiles(), appProperties.getVersion()));
+		// clients profiles
+		commands
+				.filter((k, cmd) -> cmd.getParameters().contains("profiles"))
+				.<ClientProfile>allOf(topicsProperties.getClientProfiles() + "-store") // see Materialized.as in ProfilesConfig
+				.foreach((k, profiles) -> profiles.forEach(profile -> log.debug("\n\tClient profiles:\n\t\t{}", profile)));
 		return commands;
 	}
 
 	/**
 	 * Wrapping the commands topic with KStream.
 	 */
-	private KStream<byte[], Command> commandsStream(StreamsBuilder streamsBuilder) {
+	private KStreamEx<byte[], Command> commandsStream(StreamsBuilderEx streamsBuilder) {
 		return streamsBuilder.stream(topicsProperties.getCommands(),
 				Consumed.with(Serdes.ByteArray(), new JsonSerde<>(Command.class))
 						.withName(topicsProperties.getCommands() + "-consumer"));

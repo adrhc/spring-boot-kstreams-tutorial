@@ -41,7 +41,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 # feature/4/ktable
 ### client profiles
 ```bash
-./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s="
+./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:"
 ./create-command.sh config,profiles | grep 'Command('
 ./create-client-profile.sh | tee -a profile.log | egrep '"id"'
 ```
@@ -57,7 +57,9 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 - `ProfilesConfig` is using a KTable
 - `ReportsConfig` is filtering on "config" parameter value
 - observe the logged topology (search for "Topologies:")
+- [Duality of Streams and Tables](https://kafka.apache.org/25/documentation/streams/core-concepts#streams-concepts-duality)
 ##### error
+- check clients profiles report
 ```
 InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
