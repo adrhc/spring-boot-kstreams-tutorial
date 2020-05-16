@@ -21,4 +21,9 @@ public class TopicsConfig {
 	public NewTopic commandTopic() {
 		return TopicBuilder.name(properties.getCommands()).build();
 	}
+
+	@Bean
+	public NewTopic clientProfileTopic() {
+		return TopicBuilder.name(properties.getClientProfiles()).compact().build();
+	}
 }

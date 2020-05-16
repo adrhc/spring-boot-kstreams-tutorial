@@ -1,0 +1,41 @@
+{
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages",
+  "protocol": "PaymentsProtocol",
+  "doc": "payments protocol",
+  "types": [
+	{
+	  "name": "ClientProfile",
+	  "type": "record",
+	  "fields": [
+		{
+		  "name": "id",
+		  "type": "string"
+		},
+		{
+		  "name": "name",
+		  "type": "string"
+		},
+		{
+		  "name": "surname",
+		  "type": "string"
+		},
+		{
+		  "name": "email",
+		  "type": "string"
+		},
+		{
+		  "name": "phone",
+		  "type": "string"
+		},
+		{
+		  "name": "dailyMaxAmount",
+		  "type": "int"
+		},
+		{
+		  "name": "periodMaxAmount",
+		  "type": "int"
+		}
+	  ]
+	}
+  ]
+}

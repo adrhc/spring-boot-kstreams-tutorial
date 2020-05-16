@@ -6,7 +6,8 @@ export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
 export PATH="$CONFLUENT_HOME/bin:$PATH"
 echo $CONFLUENT_HOME; echo $PATH
 confluent local start
-chmod -c +x *.sh
+confluent cluster describe --url http://localhost:8081
+confluent cluster describe --url http://localhost:8090
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
@@ -14,7 +15,12 @@ see http://localhost:9021/clusters
 ```bash
 ./run.sh | egrep -i "client1|command (consumed|received)|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
-# use {"name": "report", "parameters": ["config"]}
+# {"name": "report", "parameters": ["config"]}
+```
+this won't work with AVRO serde:
+```bash
+bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-profiles.v2
+# {"id": "1", "name": "Gigi", "surname": "Kent", "email": "gigikent@candva.ro", "phone": "0720000000", "dailyMaxAmount": 50, "periodMaxAmount": 150}
 ```
 ### highlights
 - [Stream Processing Topology](https://kafka.apache.org/24/documentation/streams/core-concepts#streams_topology)

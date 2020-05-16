@@ -12,4 +12,6 @@ import org.springframework.stereotype.Component;
 public class TopicsProperties {
 	// used as stream/destination topic name, Consumed.processorName
 	private String commands;
+	// used as destination topic name, KTable topic name, Consumed.processorName, Materialized.storeName
+	private String clientProfiles;
 }
