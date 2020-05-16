@@ -14,7 +14,7 @@ import org.apache.avro.specific.SpecificData;
 public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ClientProfile\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"periodMaxAmount\",\"type\":\"int\"}]}");
 	private static final long serialVersionUID = -905002886658350146L;
-	private static SpecificData MODEL$ = new SpecificData();
+	private static final SpecificData MODEL$ = new SpecificData();
 	private static final BinaryMessageEncoder<ClientProfile> ENCODER =
 			new BinaryMessageEncoder<ClientProfile>(MODEL$, SCHEMA$);
 	private static final BinaryMessageDecoder<ClientProfile> DECODER =
@@ -32,20 +32,23 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 	private java.lang.String phone;
 	private int dailyMaxAmount;
 	private int periodMaxAmount;
+
 	/**
 	 * Default constructor.  Note that this does not initialize fields
 	 * to their default values from the schema.  If that is desired then
 	 * one should use <code>newBuilder()</code>.
 	 */
 	public ClientProfile() {}
+
 	/**
 	 * All-args constructor.
-	 * @param id The new value for id
-	 * @param name The new value for name
-	 * @param surname The new value for surname
-	 * @param email The new value for email
-	 * @param phone The new value for phone
-	 * @param dailyMaxAmount The new value for dailyMaxAmount
+	 *
+	 * @param id              The new value for id
+	 * @param name            The new value for name
+	 * @param surname         The new value for surname
+	 * @param email           The new value for email
+	 * @param phone           The new value for phone
+	 * @param dailyMaxAmount  The new value for dailyMaxAmount
 	 * @param periodMaxAmount The new value for periodMaxAmount
 	 */
 	public ClientProfile(java.lang.String id, java.lang.String name, java.lang.String surname, java.lang.String email, java.lang.String phone, java.lang.Integer dailyMaxAmount, java.lang.Integer periodMaxAmount) {
@@ -62,6 +65,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Return the BinaryMessageEncoder instance used by this class.
+	 *
 	 * @return the message encoder used by this class
 	 */
 	public static BinaryMessageEncoder<ClientProfile> getEncoder() {
@@ -70,6 +74,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Return the BinaryMessageDecoder instance used by this class.
+	 *
 	 * @return the message decoder used by this class
 	 */
 	public static BinaryMessageDecoder<ClientProfile> getDecoder() {
@@ -78,6 +83,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
+	 *
 	 * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
 	 * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
 	 */
@@ -87,6 +93,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Deserializes a ClientProfile from a ByteBuffer.
+	 *
 	 * @param b a byte buffer holding serialized data for an instance of this class
 	 * @return a ClientProfile instance decoded from the given buffer
 	 * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
@@ -98,6 +105,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Creates a new ClientProfile RecordBuilder.
+	 *
 	 * @return A new ClientProfile RecordBuilder
 	 */
 	public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder newBuilder() {
@@ -106,6 +114,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Creates a new ClientProfile RecordBuilder by copying an existing Builder.
+	 *
 	 * @param other The existing builder to copy.
 	 * @return A new ClientProfile RecordBuilder
 	 */
@@ -119,6 +128,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Creates a new ClientProfile RecordBuilder by copying an existing ClientProfile instance.
+	 *
 	 * @param other The existing instance to copy.
 	 * @return A new ClientProfile RecordBuilder
 	 */
@@ -132,6 +142,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Serializes this ClientProfile to a ByteBuffer.
+	 *
 	 * @return a buffer holding the serialized data for this instance
 	 * @throws java.io.IOException if this instance could not be serialized
 	 */
@@ -197,6 +208,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'id' field.
+	 *
 	 * @return The value of the 'id' field.
 	 */
 	public java.lang.String getId() {
@@ -205,6 +217,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'id' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setId(java.lang.String value) {
@@ -213,6 +226,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'name' field.
+	 *
 	 * @return The value of the 'name' field.
 	 */
 	public java.lang.String getName() {
@@ -221,6 +235,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'name' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setName(java.lang.String value) {
@@ -229,6 +244,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'surname' field.
+	 *
 	 * @return The value of the 'surname' field.
 	 */
 	public java.lang.String getSurname() {
@@ -237,6 +253,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'surname' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setSurname(java.lang.String value) {
@@ -245,6 +262,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'email' field.
+	 *
 	 * @return The value of the 'email' field.
 	 */
 	public java.lang.String getEmail() {
@@ -253,6 +271,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'email' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setEmail(java.lang.String value) {
@@ -261,6 +280,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'phone' field.
+	 *
 	 * @return The value of the 'phone' field.
 	 */
 	public java.lang.String getPhone() {
@@ -269,6 +289,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'phone' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setPhone(java.lang.String value) {
@@ -277,6 +298,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'dailyMaxAmount' field.
+	 *
 	 * @return The value of the 'dailyMaxAmount' field.
 	 */
 	public int getDailyMaxAmount() {
@@ -285,6 +307,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'dailyMaxAmount' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setDailyMaxAmount(int value) {
@@ -293,6 +316,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Gets the value of the 'periodMaxAmount' field.
+	 *
 	 * @return The value of the 'periodMaxAmount' field.
 	 */
 	public int getPeriodMaxAmount() {
@@ -301,6 +325,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 	/**
 	 * Sets the value of the 'periodMaxAmount' field.
+	 *
 	 * @param value the value to set.
 	 */
 	public void setPeriodMaxAmount(int value) {
@@ -413,13 +438,16 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 		private int dailyMaxAmount;
 		private int periodMaxAmount;
 
-		/** Creates a new Builder */
+		/**
+		 * Creates a new Builder
+		 */
 		private Builder() {
 			super(SCHEMA$);
 		}
 
 		/**
 		 * Creates a Builder by copying an existing Builder.
+		 *
 		 * @param other The existing Builder to copy.
 		 */
 		private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder other) {
@@ -456,6 +484,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Creates a Builder by copying an existing ClientProfile instance
+		 *
 		 * @param other The existing instance to copy.
 		 */
 		private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile other) {
@@ -492,6 +521,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'id' field.
+		 *
 		 * @return The value.
 		 */
 		public java.lang.String getId() {
@@ -501,6 +531,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'id' field.
+		 *
 		 * @param value The value of 'id'.
 		 * @return This builder.
 		 */
@@ -513,6 +544,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'id' field has been set.
+		 *
 		 * @return True if the 'id' field has been set, false otherwise.
 		 */
 		public boolean hasId() {
@@ -522,6 +554,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'id' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearId() {
@@ -532,6 +565,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'name' field.
+		 *
 		 * @return The value.
 		 */
 		public java.lang.String getName() {
@@ -541,6 +575,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'name' field.
+		 *
 		 * @param value The value of 'name'.
 		 * @return This builder.
 		 */
@@ -553,6 +588,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'name' field has been set.
+		 *
 		 * @return True if the 'name' field has been set, false otherwise.
 		 */
 		public boolean hasName() {
@@ -562,6 +598,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'name' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearName() {
@@ -572,6 +609,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'surname' field.
+		 *
 		 * @return The value.
 		 */
 		public java.lang.String getSurname() {
@@ -581,6 +619,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'surname' field.
+		 *
 		 * @param value The value of 'surname'.
 		 * @return This builder.
 		 */
@@ -593,6 +632,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'surname' field has been set.
+		 *
 		 * @return True if the 'surname' field has been set, false otherwise.
 		 */
 		public boolean hasSurname() {
@@ -602,6 +642,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'surname' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearSurname() {
@@ -612,6 +653,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'email' field.
+		 *
 		 * @return The value.
 		 */
 		public java.lang.String getEmail() {
@@ -621,6 +663,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'email' field.
+		 *
 		 * @param value The value of 'email'.
 		 * @return This builder.
 		 */
@@ -633,6 +676,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'email' field has been set.
+		 *
 		 * @return True if the 'email' field has been set, false otherwise.
 		 */
 		public boolean hasEmail() {
@@ -642,6 +686,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'email' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearEmail() {
@@ -652,6 +697,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'phone' field.
+		 *
 		 * @return The value.
 		 */
 		public java.lang.String getPhone() {
@@ -661,6 +707,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'phone' field.
+		 *
 		 * @param value The value of 'phone'.
 		 * @return This builder.
 		 */
@@ -673,6 +720,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'phone' field has been set.
+		 *
 		 * @return True if the 'phone' field has been set, false otherwise.
 		 */
 		public boolean hasPhone() {
@@ -682,6 +730,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'phone' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearPhone() {
@@ -692,6 +741,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'dailyMaxAmount' field.
+		 *
 		 * @return The value.
 		 */
 		public int getDailyMaxAmount() {
@@ -701,6 +751,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'dailyMaxAmount' field.
+		 *
 		 * @param value The value of 'dailyMaxAmount'.
 		 * @return This builder.
 		 */
@@ -713,6 +764,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'dailyMaxAmount' field has been set.
+		 *
 		 * @return True if the 'dailyMaxAmount' field has been set, false otherwise.
 		 */
 		public boolean hasDailyMaxAmount() {
@@ -722,6 +774,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'dailyMaxAmount' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearDailyMaxAmount() {
@@ -731,6 +784,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Gets the value of the 'periodMaxAmount' field.
+		 *
 		 * @return The value.
 		 */
 		public int getPeriodMaxAmount() {
@@ -740,6 +794,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Sets the value of the 'periodMaxAmount' field.
+		 *
 		 * @param value The value of 'periodMaxAmount'.
 		 * @return This builder.
 		 */
@@ -752,6 +807,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Checks whether the 'periodMaxAmount' field has been set.
+		 *
 		 * @return True if the 'periodMaxAmount' field has been set, false otherwise.
 		 */
 		public boolean hasPeriodMaxAmount() {
@@ -761,6 +817,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
 		/**
 		 * Clears the value of the 'periodMaxAmount' field.
+		 *
 		 * @return This builder.
 		 */
 		public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearPeriodMaxAmount() {

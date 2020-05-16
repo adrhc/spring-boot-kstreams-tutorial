@@ -11,7 +11,7 @@ confluent cluster describe --url http://localhost:8090
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
-# commands
+# feature/2/commands
 ```bash
 ./run.sh | egrep -i "surname|(consumed|received):|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
@@ -38,12 +38,22 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - notice `Command implements Serializable`
 - class `TopicsConfig`: enables topic creation
 - `infrastructure` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
-# client profiles
+# feature/4/ktable
+### client profiles
 ```bash
 ./create-client-profile.sh | tee -a profile.log | egrep 'surname'
 ```
-This won't work with AVRO serde:
+This won't work when using AVRO serde:
 ```bash
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-profiles.v2
 # {"id": "1", "name": "Gigi", "surname": "Kent", "email": "gigikent@candva.ro", "phone": "0720000000", "dailyMaxAmount": 50, "periodMaxAmount": 150}
+```
+##### error
+```
+InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+```             
+**solution:** use `@NoArgsConstructor` on `Command`
+### command updates
+```bash
+./create-command.sh config,profiles | grep parameters
 ```

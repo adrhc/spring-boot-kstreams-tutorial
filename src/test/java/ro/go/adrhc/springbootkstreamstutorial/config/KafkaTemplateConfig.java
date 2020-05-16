@@ -13,6 +13,8 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.ProducerListener;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
 import java.util.Map;
 
@@ -43,6 +45,14 @@ public class KafkaTemplateConfig {
 		valueSerializer.configure(Map.of("schema.registry.url", schemaRegistryUrl), false);
 		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-avro",
 				valueSerializer, kafkaProducerListener, messageConverter);
+	}
+
+	@Bean
+	public KafkaTemplate<Object, Command> commandKTemplate(
+			ObjectProvider<ProducerListener<Object, Command>> kafkaProducerListener,
+			ObjectProvider<RecordMessageConverter> messageConverter) {
+		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-command",
+				new JsonSerializer<>(), kafkaProducerListener, messageConverter);
 	}
 
 	private <V> KafkaTemplate<Object, V> kafkaTemplateImpl(

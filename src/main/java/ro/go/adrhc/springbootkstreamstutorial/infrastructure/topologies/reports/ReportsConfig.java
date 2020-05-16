@@ -15,8 +15,6 @@ import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
-import java.time.LocalDateTime;
-
 @Configuration
 @Profile("!test")
 @Slf4j
