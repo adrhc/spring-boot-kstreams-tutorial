@@ -15,6 +15,8 @@ import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
+import java.time.LocalDateTime;
+
 @Configuration
 @Profile("!test")
 @Slf4j
@@ -39,6 +41,7 @@ public class ReportsConfig {
 			log.debug("\n\tcommand received: {}", c);
 			log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
 					env.getActiveProfiles(), appProperties.getVersion());
+//			throw new RuntimeException("by default the stream is destroyed on error " + LocalDateTime.now());
 		}, Named.as("commandsReceiver"));
 		return commands;
 	}

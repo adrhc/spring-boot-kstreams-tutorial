@@ -6,6 +6,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
+import java.time.LocalDateTime;
+
 @Profile("!test")
 @Component
 @Slf4j
@@ -15,5 +17,6 @@ public class CommandConsumer {
 			"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command"})
 	public void consume(Command command) {
 		log.debug("\n\tcommand consumed: {}", command);
+//		throw new RuntimeException("by default the consumer retries on error " + LocalDateTime.now());
 	}
 }
