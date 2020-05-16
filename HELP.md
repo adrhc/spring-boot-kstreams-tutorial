@@ -1,5 +1,6 @@
 # Context
 It's about a person having a bank account with 2 cards attached: his own and one for his wife. The client wants to be notified when a daily-expenses threshold is exceeded or one related to a period (e.g. 3 days, 1 month, etc).
+
 # Setup
 ```bash
 export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
@@ -11,6 +12,7 @@ confluent cluster describe --url http://localhost:8090
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
+
 # feature/2/commands
 ```bash
 ./run.sh | egrep -i "surname|(consumed|received):|ERROR[^s]|Configuration:|spring profiles|app version"
@@ -38,6 +40,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - notice `Command implements Serializable`
 - class `TopicsConfig`: enables topic creation
 - `infrastructure` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+
 # feature/4/ktable
 ### client profiles
 ```bash
@@ -65,3 +68,6 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
 **solution:** use `@NoArgsConstructor` on `Command`
+
+# feature/5/joins
+
