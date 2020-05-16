@@ -20,7 +20,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - [Stream Processing Topology](https://kafka.apache.org/24/documentation/streams/core-concepts#streams_topology)
     - a graph of stream processors (nodes) that are connected by streams (edges)
 - observe the logged topology (search for "Topologies:")
-- *poison message*: any exception stops the topology processing
+- *poison message*: any exception stops the foreach topology processing
     - [Kafka Streams can not recover in case of Exception while processing Messages](https://stackoverflow.com/questions/50388496/kafka-streams-can-not-recover-in-case-of-exception-while-processing-messages)
 ### other notes
 - check pom.xml
