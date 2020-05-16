@@ -13,7 +13,7 @@ see http://localhost:9021/clusters
 (disable browser cache)
 # commands
 ```bash
-./run.sh | egrep -i "surname|command (consumed|received)|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
+./run.sh | egrep -i "surname|(consumed|received):|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # {"name": "report", "parameters": ["config"]}
 ```
