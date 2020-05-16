@@ -58,8 +58,8 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 - `ReportsConfig` is filtering on "config" parameter value
 - observe the logged topology (search for "Topologies:")
 - [Duality of Streams and Tables](https://kafka.apache.org/25/documentation/streams/core-concepts#streams-concepts-duality)
+- check client profiles report (`ReportsConfig`) and implementation (`QueryAllSupp`)
 ##### error
-- check clients profiles report
 ```
 InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
