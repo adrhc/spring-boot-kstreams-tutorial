@@ -15,6 +15,5 @@ public class CommandConsumer {
 			"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command"})
 	public void consume(Command command) {
 		log.debug("\n\tcommand consumed: {}", command);
-//		throw new RuntimeException("by default the consumer retries on error " + LocalDateTime.now());
 	}
 }

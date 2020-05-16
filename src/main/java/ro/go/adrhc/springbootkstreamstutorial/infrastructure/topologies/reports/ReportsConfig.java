@@ -5,7 +5,6 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Named;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -35,12 +34,10 @@ public class ReportsConfig {
 	@Bean
 	public KStream<byte[], Command> reportingCommands(StreamsBuilder streamsBuilder) {
 		KStream<byte[], Command> commands = commandsStream(streamsBuilder);
-		commands.foreach((k, c) -> {
-			log.debug("\n\tcommand received: {}", c);
-			log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
-					env.getActiveProfiles(), appProperties.getVersion());
-//			throw new RuntimeException("by default the stream is destroyed on error " + LocalDateTime.now());
-		}, Named.as("commandsReceiver"));
+		commands
+				.filter((k, cmd) -> cmd.getParameters().contains("config"))
+				.foreach((k, c) -> log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
+						env.getActiveProfiles(), appProperties.getVersion()));
 		return commands;
 	}
 
@@ -50,6 +47,6 @@ public class ReportsConfig {
 	private KStream<byte[], Command> commandsStream(StreamsBuilder streamsBuilder) {
 		return streamsBuilder.stream(topicsProperties.getCommands(),
 				Consumed.with(Serdes.ByteArray(), new JsonSerde<>(Command.class))
-						.withName(topicsProperties.getCommands()));
+						.withName(topicsProperties.getCommands() + "-consumer"));
 	}
 }

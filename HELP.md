@@ -13,7 +13,7 @@ see http://localhost:9021/clusters
 (disable browser cache)
 # feature/2/commands
 ```bash
-./run.sh | egrep -i "surname|(consumed|received):|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
+./run.sh | egrep -i "surname|(consumed|received):|ERROR[^s]|Configuration:|spring profiles|app version"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # {"name": "report", "parameters": ["config"]}
 ```
@@ -41,19 +41,24 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 # feature/4/ktable
 ### client profiles
 ```bash
-./create-client-profile.sh | tee -a profile.log | egrep 'surname'
+./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s="
+./create-command.sh config,profiles | grep 'Command('
+./create-client-profile.sh | tee -a profile.log | egrep '"id"'
 ```
 This won't work when using AVRO serde:
 ```bash
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-profiles.v2
 # {"id": "1", "name": "Gigi", "surname": "Kent", "email": "gigikent@candva.ro", "phone": "0720000000", "dailyMaxAmount": 50, "periodMaxAmount": 150}
 ```
+### highlights
+- `TopicsConfig`: client-profiles is a compacted topic
+- using `AVRO` for client-profiles topic
+- check client-profiles topic schema and cleanup.policy in Confluent
+- `ProfilesConfig` is using a KTable
+- `ReportsConfig` is filtering on "config" parameter value
+- observe the logged topology (search for "Topologies:")
 ##### error
 ```
 InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
 **solution:** use `@NoArgsConstructor` on `Command`
-### command updates
-```bash
-./create-command.sh config,profiles | grep parameters
-```
