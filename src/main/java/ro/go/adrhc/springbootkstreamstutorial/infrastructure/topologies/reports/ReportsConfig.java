@@ -17,7 +17,7 @@ import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
-import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.extend;
+import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 
 @Configuration
 @Profile("!test")
@@ -38,7 +38,7 @@ public class ReportsConfig {
 	 */
 	@Bean
 	public KStream<byte[], Command> reportingCommands(StreamsBuilder pStreamsBuilder) {
-		StreamsBuilderEx streamsBuilder = extend(pStreamsBuilder);
+		StreamsBuilderEx streamsBuilder = from(pStreamsBuilder);
 		KStreamEx<byte[], Command> commands = commandsStream(streamsBuilder);
 		// configuration report
 		commands
