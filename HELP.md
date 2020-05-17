@@ -44,7 +44,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 # feature/4/ktable
 ### client profiles
 ```bash
-./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:|AmountExceeded\("
+./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:"
 ./create-command.sh config,profiles | grep 'Command('
 ./create-client-profile.sh | egrep '"id"'
 ```
@@ -71,6 +71,7 @@ InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springboot
 
 # feature/5/joins
 ```bash
+./run.sh | egrep -i "\"id\"|(consumed|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|Client profiles:|AmountExceeded\("
 ./create-transactions.sh 1 | egrep '"time"'
 ```
 ##### error

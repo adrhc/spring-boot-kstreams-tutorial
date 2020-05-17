@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments;
+package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.amount;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Profile;
 import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.AmountExceeded;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 
@@ -21,10 +20,10 @@ import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 @Configuration
 @Profile("!test")
 @Slf4j
-public class PaymentsConfig {
+public class AmountExceededConfig {
 	private final TopicsProperties topicsProperties;
 
-	public PaymentsConfig(TopicsProperties topicsProperties) {this.topicsProperties = topicsProperties;}
+	public AmountExceededConfig(TopicsProperties topicsProperties) {this.topicsProperties = topicsProperties;}
 
 	@Bean
 	public KStream<String, Transaction> transactions(StreamsBuilder pStreamsBuilder,
@@ -32,6 +31,7 @@ public class PaymentsConfig {
 		StreamsBuilderEx streamsBuilder = from(pStreamsBuilder);
 		KStreamEx<String, Transaction> transactions = transactionsStream(streamsBuilder);
 		transactions
+				.peek((id, t) -> log.debug("\n\tTransaction: {}", t))
 				.join(clientProfileTable,
 						this::amountExceededJoiner,
 						Joined.as("txJoinProfiles"))
@@ -44,7 +44,8 @@ public class PaymentsConfig {
 		if (t.getAmount() <= cp.getAmountLimit()) {
 			return null;
 		}
-		return new AmountExceeded();
+		return new AmountExceeded(cp.getName(), cp.getSurname(), cp.getEmail(), cp.getPhone(),
+				t.getTime(), t.getMerchantId(), t.getAmount(), cp.getAmountLimit());
 	}
 
 	private KStreamEx<String, Transaction> transactionsStream(StreamsBuilderEx streamsBuilder) {
