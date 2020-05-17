@@ -44,9 +44,9 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 # feature/4/ktable
 ### client profiles
 ```bash
-./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:"
+./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:|AmountExceeded\("
 ./create-command.sh config,profiles | grep 'Command('
-./create-client-profile.sh | tee -a profile.log | egrep '"id"'
+./create-client-profile.sh | egrep '"id"'
 ```
 This won't work when using AVRO serde:
 ```bash
@@ -70,4 +70,16 @@ InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springboot
 **solution:** use `@NoArgsConstructor` on `Command`
 
 # feature/5/joins
+```bash
+./create-transactions.sh 1 | egrep '"time"'
+```
+##### error
+```
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.43 s <<< FAILURE! - in ro.go.adrhc.springbootkstreamstutorial.producers.ClientProfileProducerIT
+[ERROR] sendClientProfile  Time elapsed: 0.859 s  <<< ERROR!
+org.apache.kafka.common.errors.SerializationException: Error registering Avro schema: {"type":"record","name":"ClientProfile","namespace":"ro.go.adrhc.springbootkstreamstutorial.infrastru
+```
+**solution:** see /tmp/confluent.xomRjOEm/schema-registry/logs/schema-registry.log
 
+# about me
+https://adrhc.go.ro/

@@ -1,5 +1,6 @@
 app:
   version: v2
+  daily-grace: 5
 schema:
   registry:
     url: http://localhost:8081
@@ -31,6 +32,8 @@ spring:
           registry:
             url: ${schema.registry.url}
         default:
+          timestamp:
+            extractor: ro.go.adrhc.springbootkstreamstutorial.config.streams.CustomTimestampExtractor
           key:
             serde: org.apache.kafka.common.serialization.Serdes$StringSerde
           value:
@@ -56,6 +59,7 @@ topic:
   prefix: ${spring.application.name}
   commands: ${topic.prefix}.commands.${app.version}
   client-profiles: ${topic.prefix}.client-profiles.${app.version}
+  transactions: ${topic.prefix}.transactions.${app.version}
 logging:
   level:
     ro:

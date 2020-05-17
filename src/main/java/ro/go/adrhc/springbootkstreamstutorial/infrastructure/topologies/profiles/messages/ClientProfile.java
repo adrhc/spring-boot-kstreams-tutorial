@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -905002886658350146L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ClientProfile\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"periodMaxAmount\",\"type\":\"int\"}]}");
+  private static final long serialVersionUID = 1602205442797427840L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ClientProfile\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"amountLimit\",\"type\":\"int\",\"default\":5},{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"periodMaxAmount\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -76,6 +76,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
    private java.lang.String surname;
    private java.lang.String email;
    private java.lang.String phone;
+   private int amountLimit;
    private int dailyMaxAmount;
    private int periodMaxAmount;
 
@@ -93,15 +94,17 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
    * @param surname The new value for surname
    * @param email The new value for email
    * @param phone The new value for phone
+   * @param amountLimit The new value for amountLimit
    * @param dailyMaxAmount The new value for dailyMaxAmount
    * @param periodMaxAmount The new value for periodMaxAmount
    */
-  public ClientProfile(java.lang.String id, java.lang.String name, java.lang.String surname, java.lang.String email, java.lang.String phone, java.lang.Integer dailyMaxAmount, java.lang.Integer periodMaxAmount) {
+  public ClientProfile(java.lang.String id, java.lang.String name, java.lang.String surname, java.lang.String email, java.lang.String phone, java.lang.Integer amountLimit, java.lang.Integer dailyMaxAmount, java.lang.Integer periodMaxAmount) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.email = email;
     this.phone = phone;
+    this.amountLimit = amountLimit;
     this.dailyMaxAmount = dailyMaxAmount;
     this.periodMaxAmount = periodMaxAmount;
   }
@@ -116,8 +119,9 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
     case 2: return surname;
     case 3: return email;
     case 4: return phone;
-    case 5: return dailyMaxAmount;
-    case 6: return periodMaxAmount;
+    case 5: return amountLimit;
+    case 6: return dailyMaxAmount;
+    case 7: return periodMaxAmount;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -131,8 +135,9 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
     case 2: surname = value$ != null ? value$.toString() : null; break;
     case 3: email = value$ != null ? value$.toString() : null; break;
     case 4: phone = value$ != null ? value$.toString() : null; break;
-    case 5: dailyMaxAmount = (java.lang.Integer)value$; break;
-    case 6: periodMaxAmount = (java.lang.Integer)value$; break;
+    case 5: amountLimit = (java.lang.Integer)value$; break;
+    case 6: dailyMaxAmount = (java.lang.Integer)value$; break;
+    case 7: periodMaxAmount = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -223,6 +228,23 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /**
+   * Gets the value of the 'amountLimit' field.
+   * @return The value of the 'amountLimit' field.
+   */
+  public int getAmountLimit() {
+    return amountLimit;
+  }
+
+
+  /**
+   * Sets the value of the 'amountLimit' field.
+   * @param value the value to set.
+   */
+  public void setAmountLimit(int value) {
+    this.amountLimit = value;
+  }
+
+  /**
    * Gets the value of the 'dailyMaxAmount' field.
    * @return The value of the 'dailyMaxAmount' field.
    */
@@ -302,6 +324,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
     private java.lang.String surname;
     private java.lang.String email;
     private java.lang.String phone;
+    private int amountLimit;
     private int dailyMaxAmount;
     private int periodMaxAmount;
 
@@ -336,13 +359,17 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
         this.phone = data().deepCopy(fields()[4].schema(), other.phone);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.dailyMaxAmount)) {
-        this.dailyMaxAmount = data().deepCopy(fields()[5].schema(), other.dailyMaxAmount);
+      if (isValidValue(fields()[5], other.amountLimit)) {
+        this.amountLimit = data().deepCopy(fields()[5].schema(), other.amountLimit);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
-      if (isValidValue(fields()[6], other.periodMaxAmount)) {
-        this.periodMaxAmount = data().deepCopy(fields()[6].schema(), other.periodMaxAmount);
+      if (isValidValue(fields()[6], other.dailyMaxAmount)) {
+        this.dailyMaxAmount = data().deepCopy(fields()[6].schema(), other.dailyMaxAmount);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.periodMaxAmount)) {
+        this.periodMaxAmount = data().deepCopy(fields()[7].schema(), other.periodMaxAmount);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
     }
 
@@ -372,13 +399,17 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
         this.phone = data().deepCopy(fields()[4].schema(), other.phone);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.dailyMaxAmount)) {
-        this.dailyMaxAmount = data().deepCopy(fields()[5].schema(), other.dailyMaxAmount);
+      if (isValidValue(fields()[5], other.amountLimit)) {
+        this.amountLimit = data().deepCopy(fields()[5].schema(), other.amountLimit);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.periodMaxAmount)) {
-        this.periodMaxAmount = data().deepCopy(fields()[6].schema(), other.periodMaxAmount);
+      if (isValidValue(fields()[6], other.dailyMaxAmount)) {
+        this.dailyMaxAmount = data().deepCopy(fields()[6].schema(), other.dailyMaxAmount);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.periodMaxAmount)) {
+        this.periodMaxAmount = data().deepCopy(fields()[7].schema(), other.periodMaxAmount);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -583,6 +614,45 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
     }
 
     /**
+      * Gets the value of the 'amountLimit' field.
+      * @return The value.
+      */
+    public int getAmountLimit() {
+      return amountLimit;
+    }
+
+
+    /**
+      * Sets the value of the 'amountLimit' field.
+      * @param value The value of 'amountLimit'.
+      * @return This builder.
+      */
+    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setAmountLimit(int value) {
+      validate(fields()[5], value);
+      this.amountLimit = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'amountLimit' field has been set.
+      * @return True if the 'amountLimit' field has been set, false otherwise.
+      */
+    public boolean hasAmountLimit() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'amountLimit' field.
+      * @return This builder.
+      */
+    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearAmountLimit() {
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'dailyMaxAmount' field.
       * @return The value.
       */
@@ -597,9 +667,9 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setDailyMaxAmount(int value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.dailyMaxAmount = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -608,7 +678,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'dailyMaxAmount' field has been set, false otherwise.
       */
     public boolean hasDailyMaxAmount() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
 
 
@@ -617,7 +687,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearDailyMaxAmount() {
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -636,9 +706,9 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setPeriodMaxAmount(int value) {
-      validate(fields()[6], value);
+      validate(fields()[7], value);
       this.periodMaxAmount = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -647,7 +717,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'periodMaxAmount' field has been set, false otherwise.
       */
     public boolean hasPeriodMaxAmount() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
 
 
@@ -656,7 +726,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearPeriodMaxAmount() {
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -670,8 +740,9 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
         record.surname = fieldSetFlags()[2] ? this.surname : (java.lang.String) defaultValue(fields()[2]);
         record.email = fieldSetFlags()[3] ? this.email : (java.lang.String) defaultValue(fields()[3]);
         record.phone = fieldSetFlags()[4] ? this.phone : (java.lang.String) defaultValue(fields()[4]);
-        record.dailyMaxAmount = fieldSetFlags()[5] ? this.dailyMaxAmount : (java.lang.Integer) defaultValue(fields()[5]);
-        record.periodMaxAmount = fieldSetFlags()[6] ? this.periodMaxAmount : (java.lang.Integer) defaultValue(fields()[6]);
+        record.amountLimit = fieldSetFlags()[5] ? this.amountLimit : (java.lang.Integer) defaultValue(fields()[5]);
+        record.dailyMaxAmount = fieldSetFlags()[6] ? this.dailyMaxAmount : (java.lang.Integer) defaultValue(fields()[6]);
+        record.periodMaxAmount = fieldSetFlags()[7] ? this.periodMaxAmount : (java.lang.Integer) defaultValue(fields()[7]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -714,6 +785,8 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
     out.writeString(this.phone);
 
+    out.writeInt(this.amountLimit);
+
     out.writeInt(this.dailyMaxAmount);
 
     out.writeInt(this.periodMaxAmount);
@@ -735,12 +808,14 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
 
       this.phone = in.readString();
 
+      this.amountLimit = in.readInt();
+
       this.dailyMaxAmount = in.readInt();
 
       this.periodMaxAmount = in.readInt();
 
     } else {
-      for (int i = 0; i < 7; i++) {
+      for (int i = 0; i < 8; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readString();
@@ -763,10 +838,14 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 5:
-          this.dailyMaxAmount = in.readInt();
+          this.amountLimit = in.readInt();
           break;
 
         case 6:
+          this.dailyMaxAmount = in.readInt();
+          break;
+
+        case 7:
           this.periodMaxAmount = in.readInt();
           break;
 

@@ -17,6 +17,8 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles
 
 import java.util.function.IntSupplier;
 
+import static ro.go.adrhc.springbootkstreamstutorial.producers.TransactionsProducerIT.MAX_AMOUNT;
+
 @EnabledIfSystemProperty(named = "enableIT", matches = "true")
 @ActiveProfiles({"test"})
 @Import(KafkaTemplateConfig.class)
@@ -29,15 +31,16 @@ public class ClientProfileProducerIT {
 			() -> RandomUtils.nextInt(150, 301);
 	@Autowired
 	@Qualifier("avroKTemplate")
-	private KafkaTemplate<Object, Object> avroKTemplate;
+	private KafkaTemplate<String, Object> avroKTemplate;
 	@Autowired
 	private TopicsProperties properties;
 	@Autowired
 	private Environment env;
 
 	private static ClientProfile randomClientProfile() {
-		return new ClientProfile("1", "Gigi", "Kent", "gigikent@candva.ro",
-				"0720000000", MAX_DAILY_AMOUNT_SUPP.getAsInt(), MAX_PERIOD_AMOUNT_SUPP.getAsInt());
+		return new ClientProfile("1", "Gigi", "Kent",
+				"gigikent@candva.ro", "0720000000", MAX_AMOUNT / 2,
+				MAX_DAILY_AMOUNT_SUPP.getAsInt(), MAX_PERIOD_AMOUNT_SUPP.getAsInt());
 	}
 
 	@Test

@@ -28,6 +28,11 @@
 		  "type": "string"
 		},
 		{
+		  "name": "amountLimit",
+		  "type": "int",
+		  "default" : 5
+		},
+		{
 		  "name": "dailyMaxAmount",
 		  "type": "int"
 		},

@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.ProducerListener;
+import org.springframework.kafka.support.LoggingProducerListener;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
@@ -30,49 +30,45 @@ public class KafkaTemplateConfig {
 	}
 
 	@Bean
-	public KafkaTemplate<Object, Integer> intKTemplate(
-			ObjectProvider<ProducerListener<Object, Integer>> kafkaProducerListener,
+	public KafkaTemplate<String, Integer> intKTemplate(
 			ObjectProvider<RecordMessageConverter> messageConverter) {
 		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-int",
-				new IntegerSerializer(), kafkaProducerListener, messageConverter);
+				new IntegerSerializer(), messageConverter);
 	}
 
 	@Bean
-	public KafkaTemplate<Object, Object> avroKTemplate(
-			ObjectProvider<ProducerListener<Object, Object>> kafkaProducerListener,
+	public KafkaTemplate<String, Object> avroKTemplate(
 			ObjectProvider<RecordMessageConverter> messageConverter) {
 		KafkaAvroSerializer valueSerializer = new KafkaAvroSerializer();
 		valueSerializer.configure(Map.of("schema.registry.url", schemaRegistryUrl), false);
 		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-avro",
-				valueSerializer, kafkaProducerListener, messageConverter);
+				valueSerializer, messageConverter);
 	}
 
 	@Bean
-	public KafkaTemplate<Object, Command> commandKTemplate(
-			ObjectProvider<ProducerListener<Object, Command>> kafkaProducerListener,
+	public KafkaTemplate<String, Command> commandKTemplate(
 			ObjectProvider<RecordMessageConverter> messageConverter) {
 		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-command",
-				new JsonSerializer<>(), kafkaProducerListener, messageConverter);
+				new JsonSerializer<>(), messageConverter);
 	}
 
-	private <V> KafkaTemplate<Object, V> kafkaTemplateImpl(
+	private <V> KafkaTemplate<String, V> kafkaTemplateImpl(
 			String clientIdPrefix, Serializer<V> valueSerializer,
-			ObjectProvider<ProducerListener<Object, V>> kafkaProducerListener,
 			ObjectProvider<RecordMessageConverter> messageConverter) {
 		// producer config
 		Map<String, Object> config = this.properties.buildProducerProperties();
 		config.put(ProducerConfig.CLIENT_ID_CONFIG, clientIdPrefix + "-producer");
 		// producer factory
-		DefaultKafkaProducerFactory<Object, V> factory = new DefaultKafkaProducerFactory<>(config);
+		DefaultKafkaProducerFactory<String, V> factory = new DefaultKafkaProducerFactory<>(config);
 		factory.setValueSerializer(valueSerializer);
 		String transactionIdPrefix = this.properties.getProducer().getTransactionIdPrefix();
 		if (transactionIdPrefix != null) {
 			factory.setTransactionIdPrefix(transactionIdPrefix);
 		}
 		// KafkaTemplate
-		KafkaTemplate<Object, V> kafkaTemplate = new KafkaTemplate<>(factory);
+		KafkaTemplate<String, V> kafkaTemplate = new KafkaTemplate<>(factory);
 		messageConverter.ifUnique(kafkaTemplate::setMessageConverter);
-		kafkaTemplate.setProducerListener(kafkaProducerListener.getIfAvailable());
+		kafkaTemplate.setProducerListener(new LoggingProducerListener<>());
 		kafkaTemplate.setDefaultTopic(this.properties.getTemplate().getDefaultTopic());
 		return kafkaTemplate;
 	}

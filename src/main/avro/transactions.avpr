@@ -1,0 +1,32 @@
+{
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages",
+  "protocol": "PaymentsProtocol",
+  "doc": "payments protocol",
+  "types": [
+	{
+	  "name": "Transaction",
+	  "type": "record",
+	  "fields": [
+		{
+		  "name": "time",
+		  "type": {
+			"type": "int",
+			"logicalType": "date"
+		  }
+		},
+		{
+		  "name": "merchantId",
+		  "type": "string"
+		},
+		{
+		  "name": "clientId",
+		  "type": "string"
+		},
+		{
+		  "name": "amount",
+		  "type": "int"
+		}
+	  ]
+	}
+  ]
+}

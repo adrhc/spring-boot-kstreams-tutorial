@@ -1,0 +1,24 @@
+package ro.go.adrhc.springbootkstreamstutorial.config.streams;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.streams.processor.TimestampExtractor;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+
+import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.util.DateUtils.millisecondsOf;
+
+public class CustomTimestampExtractor implements TimestampExtractor {
+	private static final Map<Class<?>, Function<Object, Long>> map = Map.of(
+			JsonNode.class, value -> ((JsonNode) value).get("timestamp").longValue(),
+			Transaction.class, value -> millisecondsOf(((Transaction) value).getTime()));
+
+	@Override
+	public long extract(ConsumerRecord<Object, Object> record, long partitionTime) {
+		return Optional.ofNullable(map.get(record.value().getClass()))
+				.orElse(it -> record.timestamp()).apply(record.value());
+	}
+}

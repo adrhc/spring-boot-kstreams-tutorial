@@ -11,4 +11,5 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class AppProperties {
 	private String version;
+	private int dailyGrace;
 }

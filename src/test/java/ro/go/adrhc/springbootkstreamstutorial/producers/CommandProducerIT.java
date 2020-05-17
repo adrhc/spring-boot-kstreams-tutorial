@@ -24,7 +24,7 @@ import java.util.List;
 public class CommandProducerIT {
 	@Autowired
 	@Qualifier("commandKTemplate")
-	private KafkaTemplate<Object, Command> commandKTemplate;
+	private KafkaTemplate<String, Command> commandKTemplate;
 	@Autowired
 	private TopicsProperties properties;
 	@Autowired
