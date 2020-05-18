@@ -23,6 +23,12 @@ see http://localhost:9021/clusters
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 1 | egrep '"time"'
 ```
+### highlights
+- check `AmountExceededConfig`
+- [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
+- [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
+- [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
+
 ##### error
 ```
 [ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.43 s <<< FAILURE! - in ro.go.adrhc.springbootkstreamstutorial.producers.ClientProfileProducerIT
