@@ -2,9 +2,14 @@
 shopt -s expand_aliases
 source ~/.bash_aliases
 
-# KAFKA_HOME
-cd /home/adr/tools/kafka/kafka_2.12-2.4.0
+echo "KAFKA_HOME: $KAFKA_HOME"
+if [ "$KAFKA_HOME" == "" ]; then
+	echo "set KAFKA_HOME OS-environment variable!"
+	exit 1
+fi
 
-# alias kdelete='bin/kafka-topics.sh --delete --zookeeper 127.0.0.1:2181 --topic'
-kdelete sbkst.commands.v2
-kdelete sbkst.commands.v2
+KDELETE="$KAFKA_HOME/bin/kafka-topics.sh --delete --zookeeper 127.0.0.1:2181 --topic"
+
+$KDELETE sbkst.commands.v2
+$KDELETE sbkst.client-profiles.v2
+
