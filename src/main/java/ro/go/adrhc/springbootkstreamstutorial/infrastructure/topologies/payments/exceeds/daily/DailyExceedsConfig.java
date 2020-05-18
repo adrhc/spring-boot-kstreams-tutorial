@@ -3,13 +3,13 @@ package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payment
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.streams.kstream.Grouped;
+import org.apache.kafka.streams.kstream.KGroupedStream;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.TimeWindows;
 import org.apache.kafka.streams.state.WindowStore;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
+import org.springframework.stereotype.Component;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
@@ -20,12 +20,11 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggregation.LocalDateBasedKey.keyOf;
 import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.util.DateUtils.localDateTimeOf;
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
 
-@Configuration
+@Component
 @Profile("!test")
 @Slf4j
 public class DailyExceedsConfig extends AbstractExceeds {
@@ -49,12 +48,7 @@ public class DailyExceedsConfig extends AbstractExceeds {
 	 * calculating total expenses per day
 	 * using Tumbling time window
 	 */
-	@Bean
-	public KStream<String, Transaction> dailyExceeds(StreamsBuilder pStreamsBuilder) {
-		StreamsBuilderEx streamsBuilder = from(pStreamsBuilder);
-
-		KStreamEx<String, Transaction> transactions = transactionsStream(streamsBuilder);
-
+	public void accept(KStreamEx<String, Transaction> transactions) {
 		// total expenses per day
 		KGroupedStream<String, Transaction> txGroupedByCli = txGroupedByClientId(transactions);
 
@@ -71,8 +65,6 @@ public class DailyExceedsConfig extends AbstractExceeds {
 				.peek((k, amount) -> log.debug("\n\tTotal spent: {}, amount = {}", k, amount))
 				// save clientIdDay:amount into a compact stream (aka table)
 				.to(topicsProperties.getDailyTotalSpent());
-
-		return transactions;
 	}
 
 	/**

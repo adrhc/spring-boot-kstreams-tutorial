@@ -1,35 +1,28 @@
 package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.amount;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Joined;
-import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
+import org.springframework.stereotype.Component;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.AbstractExceeds;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 
-import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
-
-@Configuration
+@Component
 @Profile("!test")
 @Slf4j
 public class AmountExceededConfig extends AbstractExceeds {
-	public AmountExceededConfig(TopicsProperties topicsProperties) {
+	private final KTable<String, ClientProfile> clientProfileTable;
+
+	public AmountExceededConfig(TopicsProperties topicsProperties, KTable<String, ClientProfile> clientProfileTable) {
 		super(topicsProperties);
+		this.clientProfileTable = clientProfileTable;
 	}
 
-	@Bean
-	public KStream<String, Transaction> transactions(StreamsBuilder pStreamsBuilder,
-			KTable<String, ClientProfile> clientProfileTable) {
-		StreamsBuilderEx streamsBuilder = from(pStreamsBuilder);
-		KStreamEx<String, Transaction> transactions = transactionsStream(streamsBuilder);
+	public void accept(KStreamEx<String, Transaction> transactions) {
 		transactions
 				.peek((id, t) -> log.debug("\n\tTransaction: {}", t))
 				.join(clientProfileTable,
@@ -37,7 +30,6 @@ public class AmountExceededConfig extends AbstractExceeds {
 						Joined.as("txJoinProfiles"))
 				.filter((k, v) -> v != null)
 				.foreach((id, ae) -> log.debug("\n\t{}", ae));
-		return transactions;
 	}
 
 	private AmountExceeded amountExceededJoiner(Transaction t, ClientProfile cp) {
