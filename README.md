@@ -16,7 +16,7 @@ see http://localhost:9021/clusters
 ```bash
 ./run.sh | egrep -i "client1|command (consumed|received)|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
-# use {"name": "report", "parameters": ["config"]}
+# use {"names": ["config"]}
 ```
 
 ### highlights
