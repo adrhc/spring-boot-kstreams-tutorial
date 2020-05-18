@@ -71,7 +71,7 @@ public class DailyExceedsConfig extends AbstractExceeds {
 	private KGroupedStream<String, Transaction> txGroupedByClientId(
 			KStreamEx<String, Transaction> transactions) {
 		return transactions
-				// log expenses
+				// log expenses (using custom peek implementation)
 				.peek(it -> {
 					log.trace("\n\ttopic: {}\n\ttimestamp: {}",
 							it.context.topic(), localDateTimeOf(it.context.timestamp()));

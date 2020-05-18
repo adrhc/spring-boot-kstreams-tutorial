@@ -23,6 +23,9 @@ see http://localhost:9021/clusters
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 1 | egrep '"time"'
 ```
+- see that both AmountExceededConfig and DailyExceedsConfig need transactions KStream
+- txGroupedByClientId is using a custom peek implementation
+- CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself
 
 # feature/5/joins
 ```bash
