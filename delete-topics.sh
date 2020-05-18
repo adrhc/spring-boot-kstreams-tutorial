@@ -15,6 +15,10 @@ KDELETE="kafka-topics --delete --zookeeper 127.0.0.1:2181 --topic"
 $KDELETE sbkst.commands.v2
 $KDELETE sbkst.client-profiles.v2
 $KDELETE sbkst.transactions.v2
+$KDELETE sbkst.daily-exceeds.v2
+$KDELETE sbkst.daily-exceeds.v2
+$KDELETE sbkst.daily-total-spent.v2
+$KDELETE sbkst-dailyTotalSpentByClientId-1Days-changelog
 
 # schema deletion
 # curl http://localhost:8081/subjects
