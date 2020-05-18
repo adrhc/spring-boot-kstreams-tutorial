@@ -38,7 +38,7 @@ public class ReportsConfig {
 	public KStream<byte[], Command> reportingCommands(StreamsBuilder streamsBuilder) {
 		KStream<byte[], Command> commands = commandsStream(streamsBuilder);
 		commands.foreach((k, c) -> {
-			log.debug("\n\tcommand received: {}", c);
+			log.debug("\n\tReceived: {}", c);
 			log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
 					env.getActiveProfiles(), appProperties.getVersion());
 //			throw new RuntimeException("by default the stream is destroyed on error " + LocalDateTime.now());
