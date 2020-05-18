@@ -16,6 +16,7 @@ $KDELETE sbkst.commands.v2
 $KDELETE sbkst.client-profiles.v2
 
 # schema deletion
+# curl http://localhost:8081/subjects
 curl -X DELETE http://localhost:8081/subjects/sbkst.client-profiles.v2-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-sbkst.client-profiles.v2-changelog-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-sbkst.client-profiles.v2-store-changelog-value
