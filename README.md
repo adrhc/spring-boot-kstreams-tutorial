@@ -26,11 +26,8 @@ see http://localhost:9021/clusters
 (disable browser cache)
 
 # feature/3/classic-consumer
-```bash
-./run.sh | egrep -i "client1|command (consumed|received)|ERROR[^s]|totals:|Configuration:|spring profiles|app version"
-bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
-# use {"names": ["config"]}
-```
+- use the same instructions as for `feature/2/commands` branch
+- check `CommandConsumer` and how it deals with exceptions
 
 # feature/2/commands
 ```bash
