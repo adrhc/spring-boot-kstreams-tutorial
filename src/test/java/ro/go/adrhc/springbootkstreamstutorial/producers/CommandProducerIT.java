@@ -38,6 +38,6 @@ public class CommandProducerIT {
 		Command report = new Command(
 				reportType == null ? List.of("config") : List.of(reportType.split(",")));
 		log.debug("report command:\n\t{}", report);
-		commandKTemplate.send(properties.getCommands(), new byte[0], report);
+		commandKTemplate.send(properties.getCommands(), "", report);
 	}
 }

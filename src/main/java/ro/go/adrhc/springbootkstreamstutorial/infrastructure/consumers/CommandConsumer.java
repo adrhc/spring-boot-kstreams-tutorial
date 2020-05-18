@@ -14,6 +14,6 @@ public class CommandConsumer {
 			clientIdPrefix = "commandConsumer", properties = {"spring.json.value.default.type=" +
 			"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command"})
 	public void consume(Command command) {
-		log.debug("\n\tcommand consumed: {}", command);
+		log.debug("\n\tConsumed: {}", command);
 	}
 }
