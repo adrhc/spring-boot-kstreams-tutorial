@@ -28,8 +28,12 @@ see http://localhost:9021/clusters
 # feature/2/commands
 ```bash
 ./run.sh | egrep -i "client1|command received|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
+# with Kafka:
+bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+# with Confluent:
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
-# use {"names": ["config"]}
+# use:
+# {"names": ["config"]}
 ```
 
 ### highlights
