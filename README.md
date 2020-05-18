@@ -1,7 +1,20 @@
 # About
 This is an introduction to Kafka Streams with Spring Boot.
 
-# Setup
+# Kafka setup
+```bash
+export KAFKA_HOME="/home/adr/tools/kafka/kafka_2.12-2.4.0"
+export PATH="$PATH:$KAFKA_HOME/bin"
+echo $KAFKA_HOME; echo $PATH
+cd $KAFKA_HOME
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+#bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+#bin/kafka-topics.sh --list --zookeeper localhost:2181
+#bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic test
+```
+
+# Confluent setup
 ```bash
 export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
 export PATH="$CONFLUENT_HOME/bin:$PATH"
@@ -12,11 +25,22 @@ chmod -c +x *.sh
 see http://localhost:9021/clusters  
 (disable browser cache)
 
-# commands
+# feature/3/classic-consumer
 ```bash
-./run.sh | egrep -i "client1|command (consumed|received)|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
+./run.sh | egrep -i "client1|command (consumed|received)|ERROR[^s]|totals:|Configuration:|spring profiles|app version"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # use {"names": ["config"]}
+```
+
+# feature/2/commands
+```bash
+./run.sh | egrep -i "client1|command (consumed|received)|ERROR[^s]|totals:|Configuration:|spring profiles|app version"
+# with Kafka:
+bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+# with Confluent:
+bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+# use:
+# {"names": ["config"]}
 ```
 
 ### highlights
@@ -41,3 +65,9 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - notice `Command implements Serializable`
 - class `TopicsConfig`: enables topic creation
 - `infrastructure` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+
+# feature/1-init
+- check Spring Initializr.png
+- check application.properties
+- check SpringBootKstreamsTutorialApplication
+- check pom.xml
