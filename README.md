@@ -1,7 +1,11 @@
 # About
 This is an introduction to Kafka Streams with Spring Boot.
 
-# Getting Started
+# feature/1-init
+- check Spring Initializr.png
+- check application.properties
+- check SpringBootKstreamsTutorialApplication
+- check pom.xml
 
 ### Reference Documentation
 For further reference, please consider the following sections:
