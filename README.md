@@ -1,5 +1,9 @@
+# About
+This is an introduction to Kafka Streams with Spring Boot.
+
 # Context
 It's about a person having a bank account with 2 cards attached: his own and one for his wife. The client wants to be notified when a daily-expenses threshold is exceeded or one related to a period (e.g. 3 days, 1 month, etc).
+
 # Setup
 ```bash
 export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
@@ -10,18 +14,21 @@ chmod -c +x *.sh
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
+
 # commands
 ```bash
 ./run.sh | egrep -i "client1|command (consumed|received)|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # use {"name": "report", "parameters": ["config"]}
 ```
+
 ### highlights
 - [Stream Processing Topology](https://kafka.apache.org/24/documentation/streams/core-concepts#streams_topology)
     - a graph of stream processors (nodes) that are connected by streams (edges)
 - observe the logged topology (search for "Topologies:")
 - *poison message*: any exception stops the foreach topology processing
     - [Kafka Streams can not recover in case of Exception while processing Messages](https://stackoverflow.com/questions/50388496/kafka-streams-can-not-recover-in-case-of-exception-while-processing-messages)
+
 ### other notes
 - check pom.xml
 - check application.yml
