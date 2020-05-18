@@ -17,7 +17,7 @@ see http://localhost:9021/clusters
 ```bash
 ./run.sh | egrep -i "surname|(consumed|received):|ERROR[^s]|Configuration:|spring profiles|app version"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
-# {"name": "report", "parameters": ["config"]}
+# {"names": ["config"]}
 ```
 
 ### highlights

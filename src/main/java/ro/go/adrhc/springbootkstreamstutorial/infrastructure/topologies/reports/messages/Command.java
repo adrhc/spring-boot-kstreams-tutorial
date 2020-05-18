@@ -10,6 +10,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Command implements Serializable {
-	private java.lang.String name;
-	private java.util.List<java.lang.String> parameters;
+	private java.util.List<java.lang.String> names;
 }
