@@ -1,5 +1,5 @@
-# Context
-It's about a person having a bank account with 2 cards attached: his own and one for his wife. The client wants to be notified when a daily-expenses threshold is exceeded or one related to a period (e.g. 3 days, 1 month, etc).
+# About
+This is an introduction to Kafka Streams with Spring Boot.
 
 # Setup
 ```bash
