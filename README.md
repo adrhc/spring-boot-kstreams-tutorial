@@ -12,7 +12,7 @@ chmod -c +x *.sh
 see http://localhost:9021/clusters  
 (disable browser cache)
 
-# commands
+# feature/2/commands
 ```bash
 ./run.sh | egrep -i "client1|command received|Notification:|Overdue:|Limit:|ERROR[^s]|totals:|Configuration:|spring profiles|app version|windowSize|windowUnit|enhancements"
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
