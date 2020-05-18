@@ -17,7 +17,12 @@ see http://localhost:9021/clusters
 (disable browser cache)
 
 # feature/6/windowing
-
+```bash
+./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
+./create-client-profile.sh | egrep '"id"'
+./create-command.sh config,profiles | grep 'Command('
+./create-transactions.sh 1 | egrep '"time"'
+```
 
 # feature/5/joins
 ```bash

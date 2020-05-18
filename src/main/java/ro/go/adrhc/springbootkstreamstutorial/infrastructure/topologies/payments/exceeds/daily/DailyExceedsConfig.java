@@ -21,6 +21,7 @@ import java.time.temporal.ChronoUnit;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggregation.LocalDateBasedKey.keyOf;
+import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggregation.LocalDateBasedKey.parseWithStringData;
 import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.util.DateUtils.localDateTimeOf;
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
 
@@ -62,7 +63,9 @@ public class DailyExceedsConfig extends AbstractExceeds {
 				// clientIdDay:amount
 				.toStream((win, amount) -> keyOf(win))
 				// log expenses
-				.peek((k, amount) -> log.debug("\n\tTotal spent: {}, amount = {}", k, amount))
+				.peek((k, amount) -> parseWithStringData(k).ifPresent(
+						localDateBasedKey -> log.debug("\n\tClient (id) {} spent {} on {}",
+								localDateBasedKey.getData(), amount, format(localDateBasedKey.getTime()))))
 				// save clientIdDay:amount into a compact stream (aka table)
 				.to(topicsProperties.getDailyTotalSpent());
 	}
