@@ -1,7 +1,5 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'ro.go.adrhc.spring-boot-kstreams-tutorial' is invalid and this project uses 'ro.go.adrhc.springbootkstreamstutorial' instead.
+# About
+This is an introduction to Kafka Streams with Spring Boot.
 
 # Getting Started
 
