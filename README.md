@@ -10,6 +10,8 @@ confluent local start
 confluent cluster describe --url http://localhost:8081
 confluent cluster describe --url http://localhost:8090
 kafka-topics --list --zookeeper localhost:2181 | grep -v '_'
+curl http://localhost:8081/subjects
+curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
