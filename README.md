@@ -26,6 +26,7 @@ see http://localhost:9021/clusters
 - see that both AmountExceededConfig and DailyExceedsConfig need transactions KStream
 - txGroupedByClientId is using a custom peek implementation
 - CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself
+- [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
 
 # feature/5/joins
 ```bash
