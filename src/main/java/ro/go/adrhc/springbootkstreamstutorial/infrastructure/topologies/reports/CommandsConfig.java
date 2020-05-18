@@ -73,8 +73,8 @@ public class CommandsConfig {
 				.transformValues(new DailyValueTransformerSupp(dailyTotalSpentStore), dailyTotalSpentStore)
 				.foreach((k, list) -> {
 					list.sort(Comparator.comparing(DailyTotalSpent::getTime));
-					log.debug("\n\tDaily totals:\n\t\t{}", list.stream().map(it ->
-							"Client (id) " + it.getClientId() + ", " + format(it.getTime()) +
+					log.debug("\n\tDaily totals:{}", list.stream().map(it ->
+							"\n\t\tClient (id) " + it.getClientId() + ", " + format(it.getTime()) +
 									": " + it.getAmount() + " " + appProperties.getCurrency())
 							.collect(Collectors.joining("\n\t")));
 				});
