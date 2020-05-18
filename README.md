@@ -7,7 +7,7 @@ This is an introduction to Kafka Streams with Spring Boot.
 - check SpringBootKstreamsTutorialApplication
 - check pom.xml
 
-### Reference Documentation
+# Reference Documentation
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -18,7 +18,7 @@ For further reference, please consider the following sections:
 * [Apache Kafka Streams Binding Capabilities of Spring Cloud Stream](https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#_kafka_streams_binding_capabilities_of_spring_cloud_stream)
 * [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/2.2.7.RELEASE/reference/htmlsingle/#configuration-metadata-annotation-processor)
 
-### Guides
+# Guides
 The following guides illustrate how to use some features concretely:
 
 * [Samples for using Apache Kafka Streams with Spring Cloud stream](https://github.com/spring-cloud/spring-cloud-stream-samples/tree/master/kafka-streams-samples)
