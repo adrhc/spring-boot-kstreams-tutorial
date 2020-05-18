@@ -3,6 +3,7 @@ package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payment
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.kstream.Joined;
 import org.apache.kafka.streams.kstream.KTable;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
@@ -12,6 +13,7 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 
 @Component
+@DependsOn("clientProfileTable")
 @Profile("!test")
 @Slf4j
 public class AmountExceededConfig extends AbstractExceeds {
