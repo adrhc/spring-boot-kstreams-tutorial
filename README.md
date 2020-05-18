@@ -1,9 +1,12 @@
 # About
 This is an introduction to Kafka Streams with Spring Boot.
 
-# Getting Started
+# master branch
+- check Spring Initializr.png
+- check application.properties
+- check SpringBootKstreamsTutorialApplication
 
-### Reference Documentation
+# Reference Documentation
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
