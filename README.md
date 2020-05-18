@@ -18,7 +18,7 @@ see http://localhost:9021/clusters
 
 # feature/5/joins
 ```bash
-./run.sh | egrep -i "\"id\"|(consumed|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|Client profiles:|AmountExceeded\("
+./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|AmountExceeded\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 1 | egrep '"time"'
