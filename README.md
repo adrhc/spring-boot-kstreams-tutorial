@@ -1,7 +1,20 @@
 # About
 This is an introduction to Kafka Streams with Spring Boot.
 
-# Setup
+# Kafka setup
+```bash
+export KAFKA_HOME="/home/adr/tools/kafka/kafka_2.12-2.4.0"
+export PATH="$PATH:$KAFKA_HOME/bin"
+echo $KAFKA_HOME; echo $PATH
+cd $KAFKA_HOME
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+#bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+#bin/kafka-topics.sh --list --zookeeper localhost:2181
+#bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic test
+```
+
+# Confluent setup
 ```bash
 export CONFLUENT_HOME="/home/adr/tools/confluent/confluent-5.5.0"
 export PATH="$CONFLUENT_HOME/bin:$PATH"
