@@ -42,12 +42,12 @@ public class ReportsConfig {
 		KStreamEx<byte[], Command> commands = commandsStream(streamsBuilder);
 		// configuration report
 		commands
-				.filter((k, cmd) -> cmd.getParameters().contains("config"))
+				.filter((k, cmd) -> cmd.getNames().contains("config"))
 				.foreach((k, c) -> log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
 						env.getActiveProfiles(), appProperties.getVersion()));
 		// clients profiles
 		commands
-				.filter((k, cmd) -> cmd.getParameters().contains("profiles"))
+				.filter((k, cmd) -> cmd.getNames().contains("profiles"))
 				.<ClientProfile>allOf(topicsProperties.getClientProfiles() + "-store") // see Materialized.as in ProfilesConfig
 				.foreach((k, profiles) -> profiles.forEach(profile -> log.debug("\n\tClient profiles:\n\t\t{}", profile)));
 		return commands;

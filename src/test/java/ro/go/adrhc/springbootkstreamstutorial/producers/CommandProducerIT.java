@@ -35,9 +35,9 @@ public class CommandProducerIT {
 		log.debug("profiles: {}", String.join(", ", env.getActiveProfiles()));
 		log.debug("Command topic: {}", properties.getCommands());
 		String reportType = System.getProperty("reportType");
-		Command report = new Command("report",
+		Command report = new Command(
 				reportType == null ? List.of("config") : List.of(reportType.split(",")));
 		log.debug("report command:\n\t{}", report);
-		commandKTemplate.send(properties.getCommands(), report.getName(), report);
+		commandKTemplate.send(properties.getCommands(), "", report);
 	}
 }
