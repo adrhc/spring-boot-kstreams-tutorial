@@ -60,11 +60,12 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 ### highlights
 - `TopicsConfig`: client-profiles is a compacted topic
 - using `AVRO` for client-profiles topic
-- check client-profiles topic schema and cleanup.policy in Confluent
+- check client-profiles topic schema and `cleanup.policy` in Confluent
 - `ProfilesConfig` is using a KTable
 - `ReportsConfig` is filtering on "config" parameter value
 - observe the logged topology (search for "Topologies:")
 - [Duality of Streams and Tables](https://kafka.apache.org/25/documentation/streams/core-concepts#streams-concepts-duality)
+- [Interactive Queries](https://kafka.apache.org/10/documentation/streams/developer-guide/interactive-queries.html)
 - check client profiles report (`ReportsConfig`) and implementation (`QueryAllSupp`)
 - check [Kafka Streams DSL extensions](https://github.com/adrhc/kafka-streams-extensions)
 
