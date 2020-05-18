@@ -1,6 +1,7 @@
 app:
   version: v2
   daily-grace: 5
+  currency: EURO
 schema:
   registry:
     url: http://localhost:8081
@@ -60,6 +61,8 @@ topic:
   commands: ${topic.prefix}.commands.${app.version}
   client-profiles: ${topic.prefix}.client-profiles.${app.version}
   transactions: ${topic.prefix}.transactions.${app.version}
+  daily-total-spent: ${topic.prefix}.daily-total-spent.${app.version}
+  daily-exceeds: ${topic.prefix}.daily-exceeds.${app.version}
 logging:
   level:
     ro:

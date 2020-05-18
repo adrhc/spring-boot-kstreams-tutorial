@@ -16,4 +16,8 @@ public class TopicsProperties {
 	private String clientProfiles;
 	// used as stream/destination topic name, Consumed.processorName
 	private String transactions;
+	// used as destination topic name, KTable topic name, Consumed.processorName, Materialized.storeName
+	private String dailyTotalSpent;
+	// used as destination topic name, Produced.processorName
+	private String dailyExceeds;
 }

@@ -16,6 +16,9 @@ curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 see http://localhost:9021/clusters  
 (disable browser cache)
 
+# feature/6/windowing
+
+
 # feature/5/joins
 ```bash
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|AmountExceeded\("

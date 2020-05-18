@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public class AppProperties {
 	private String version;
 	private int dailyGrace;
+	private String currency;
 }

@@ -2,7 +2,6 @@ package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payment
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.Joined;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
@@ -12,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.AbstractExceeds;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 
@@ -20,10 +20,10 @@ import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 @Configuration
 @Profile("!test")
 @Slf4j
-public class AmountExceededConfig {
-	private final TopicsProperties topicsProperties;
-
-	public AmountExceededConfig(TopicsProperties topicsProperties) {this.topicsProperties = topicsProperties;}
+public class AmountExceededConfig extends AbstractExceeds {
+	public AmountExceededConfig(TopicsProperties topicsProperties) {
+		super(topicsProperties);
+	}
 
 	@Bean
 	public KStream<String, Transaction> transactions(StreamsBuilder pStreamsBuilder,
@@ -46,10 +46,5 @@ public class AmountExceededConfig {
 		}
 		return new AmountExceeded(cp.getName(), cp.getSurname(), cp.getEmail(), cp.getPhone(),
 				t.getTime(), t.getMerchantId(), t.getAmount(), cp.getAmountLimit());
-	}
-
-	private KStreamEx<String, Transaction> transactionsStream(StreamsBuilderEx streamsBuilder) {
-		return streamsBuilder.stream(topicsProperties.getTransactions(),
-				Consumed.as(topicsProperties.getTransactions()));
 	}
 }

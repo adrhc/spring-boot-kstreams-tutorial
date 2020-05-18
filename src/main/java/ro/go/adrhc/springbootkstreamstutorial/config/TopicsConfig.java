@@ -29,4 +29,14 @@ public class TopicsConfig {
 	public NewTopic transactionsTopic() {
 		return TopicBuilder.name(properties.getTransactions()).build();
 	}
+
+	@Bean
+	public NewTopic dailyTotalSpentTopic() {
+		return TopicBuilder.name(properties.getDailyTotalSpent()).compact().build();
+	}
+
+	@Bean
+	public NewTopic dailyExceededTopic() {
+		return TopicBuilder.name(properties.getDailyExceeds()).compact().build();
+	}
 }
