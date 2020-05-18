@@ -73,6 +73,8 @@ InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springboot
 # feature/5/joins
 ```bash
 ./run.sh | egrep -i "\"id\"|(consumed|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|Client profiles:|AmountExceeded\("
+./create-client-profile.sh | egrep '"id"'
+./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 1 | egrep '"time"'
 ```
 ##### error
