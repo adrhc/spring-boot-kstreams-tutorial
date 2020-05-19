@@ -35,6 +35,22 @@
 		{
 		  "name": "dailyTotalSpent",
 		  "type": "DailyTotalSpent"
+		},
+		{
+		  "name": "name",
+		  "type": "string"
+		},
+		{
+		  "name": "surname",
+		  "type": "string"
+		},
+		{
+		  "name": "email",
+		  "type": "string"
+		},
+		{
+		  "name": "phone",
+		  "type": "string"
 		}
 	  ]
 	}

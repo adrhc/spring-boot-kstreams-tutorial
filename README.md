@@ -9,7 +9,7 @@ echo $CONFLUENT_HOME; echo $PATH
 confluent local start
 confluent cluster describe --url http://localhost:8081
 confluent cluster describe --url http://localhost:8090
-kafka-topics --list --zookeeper localhost:2181 | grep -v '_'
+kafka-topics --list --zookeeper localhost:2181 | egrep -v "_|connect-"
 curl http://localhost:8081/subjects
 curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 ```
@@ -19,10 +19,13 @@ see http://localhost:9021/clusters
 # feature/8/daily-exceeds-notification
 - changing KTable-KTable join to KStream-KTable join
 - daily-exceeds topic is compact so can't have client-id as key (using `DailyTotalSpentKey`)
+- check DailyExceedsConsumer: using JsonDeserializer for key and AVRO for value
+- *.avpr does not support imports but *.avdl does (https://avro.apache.org/docs/1.9.2/idl.html#imports)
+    - check daily-exceeds.avpr 
 
 # feature/7/daily-exceeds
 ```bash
-./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
+./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|Limit|Notification|Overdue|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 3 | egrep '"time"'
@@ -31,7 +34,6 @@ see http://localhost:9021/clusters
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
 - careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again!
-- check DailyExceedsConsumer: using JsonDeserializer for key and AVRO for value 
 
 ### error
 ```

@@ -58,7 +58,8 @@ public class DailyExceedsConfig extends AbstractExceeds {
 
 	private DailyExceeded dailyExceededJoiner(DailyTotalSpent dts, ClientProfile cp) {
 		if (cp.getDailyMaxAmount() < dts.getAmount()) {
-			return new DailyExceeded(cp.getDailyMaxAmount(), dts);
+			// *.avpr does not support imports but *.avdl does
+			return new DailyExceeded(cp.getDailyMaxAmount(), dts, cp.getName(), cp.getSurname(), cp.getEmail(), cp.getPhone());
 		}
 		log.trace("\n\tskipping daily total spent under {} {}\n\t{}\n\t{}",
 				cp.getDailyMaxAmount(), appProperties.getCurrency(), dts, cp);
