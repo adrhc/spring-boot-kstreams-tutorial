@@ -17,8 +17,16 @@ see http://localhost:9021/clusters
 (disable browser cache)
 
 # feature/7/daily-exceeds
+```bash
+./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
+./create-client-profile.sh | egrep '"id"'
+./create-command.sh config,profiles | grep 'Command('
+./create-transactions.sh 3 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
+```
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
+- careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again! 
 
 ### error
 ```

@@ -5,6 +5,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.*;
+import org.apache.kafka.streams.state.KeyValueStore;
 import org.apache.kafka.streams.state.WindowStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,14 +38,6 @@ public class DailyTotalsConfig extends AbstractExceeds {
 		this.appProperties = appProperties;
 	}
 
-	protected Materialized<String, Integer, WindowStore<Bytes, byte[]>> dailyTotalSpentByClientId(int retentionDays) {
-		return Materialized.<String, Integer, WindowStore<Bytes, byte[]>>
-				as("dailyTotalSpentGroupedByClientId-1" + DAYS.toString())
-				.withKeySerde(Serdes.String())
-				.withValueSerde(Serdes.Integer())
-				.withRetention(Duration.ofDays(retentionDays));
-	}
-
 	/**
 	 * calculating total expenses per day
 	 * using Tumbling time window
@@ -72,6 +65,14 @@ public class DailyTotalsConfig extends AbstractExceeds {
 				.to(topicsProperties.getDailyTotalSpent(), dailyTotalSpentProducer());
 	}
 
+	private Materialized<String, Integer, WindowStore<Bytes, byte[]>> dailyTotalSpentByClientId(int retentionDays) {
+		return Materialized.<String, Integer, WindowStore<Bytes, byte[]>>
+				as("dailyTotalSpentGroupedByClientId-1" + DAYS.toString())
+				.withKeySerde(Serdes.String())
+				.withValueSerde(Serdes.Integer())
+				.withRetention(Duration.ofDays(retentionDays));
+	}
+
 	private Produced<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentProducer() {
 		return Produced.<DailyTotalSpentKey, DailyTotalSpent>
 				as(streamOf(topicsProperties.getDailyTotalSpent()))
@@ -86,7 +87,10 @@ public class DailyTotalsConfig extends AbstractExceeds {
 						as(tableOf(topicsProperties.getDailyTotalSpent()))
 						// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 						.withKeySerde(dailyTotalSpentKeySerde()),
-				Materialized.as(storeOf(topicsProperties.getDailyTotalSpent())));
+				Materialized.<DailyTotalSpentKey, DailyTotalSpent, KeyValueStore<Bytes, byte[]>>
+						as(storeOf(topicsProperties.getDailyTotalSpent()))
+						// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
+						.withKeySerde(dailyTotalSpentKeySerde()));
 	}
 
 	@Bean
