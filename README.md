@@ -21,6 +21,8 @@ export PATH="$CONFLUENT_HOME/bin:$PATH"
 echo $CONFLUENT_HOME; echo $PATH
 confluent local start
 chmod -c +x *.sh
+kafka-topics --list --zookeeper localhost:2181 | egrep -v "_|connect-"
+curl http://localhost:8081/subjects
 ```
 see http://localhost:9021/clusters  
 (disable browser cache)
