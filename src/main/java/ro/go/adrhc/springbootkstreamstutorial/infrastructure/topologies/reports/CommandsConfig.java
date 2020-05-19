@@ -3,6 +3,7 @@ package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
@@ -17,15 +18,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.kafka.support.serializer.JsonSerde;
 import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
+import ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggregation.LocalDateBasedKey;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.transformers.DailyValueTransformerSupp;
 
 import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
@@ -63,23 +63,37 @@ public class CommandsConfig {
 		// clients profiles
 		commands
 				.filter((k, cmd) -> cmd.getNames().contains("profiles"))
-				.<ClientProfile>allOf(storeOf(topicsProperties.getClientProfiles())) // see Materialized.as in ProfilesConfig
+				.<ClientProfile>allValuesOf(storeOf(topicsProperties.getClientProfiles())) // see Materialized.as in ProfilesConfig
 				.foreach((k, profiles) -> profiles.forEach(profile -> log.debug("\n\tClient profiles:\n\t\t{}", profile)));
 
 		// daily total spent report
 		String dailyTotalSpentStore = storeOf(topicsProperties.getDailyTotalSpent());
 		commands
 				.filter((k, cmd) -> cmd.getNames().contains("daily"))
-				.transformValues(new DailyValueTransformerSupp(dailyTotalSpentStore), dailyTotalSpentStore)
-				.foreach((k, list) -> {
-					list.sort(Comparator.comparing(DailyTotalSpent::getTime));
-					log.debug("\n\tDaily totals:{}", list.stream().map(it ->
-							"\n\t\tClient (id) " + it.getClientId() + ", " + format(it.getTime()) +
-									": " + it.getAmount() + " " + appProperties.getCurrency())
-							.collect(Collectors.joining("\n\t")));
-				});
+				// querying dailyTotalSpentStore to get a List<KeyValue<clientId-day, amount>>
+				.<String, Integer>allOf(dailyTotalSpentStore)
+				// The variable "list" below is a List<KeyValue<clientId-day, amount>>.
+				.foreach((k, dailyTotalsList) -> this.logDailyTotals(dailyTotalsList));
 
 		return commands;
+	}
+
+	private void logDailyTotals(List<KeyValue<String, Integer>> dailyTotals) {
+		log.debug("\n\tDaily totals:");
+		dailyTotals.stream()
+				// "kv1" below is KeyValue<clientId-day, amount>
+				// LocalDateBasedKey is a POJO containing the day and client-id.
+				.map(kv1 -> KeyValue.pair(LocalDateBasedKey.parseWithStringData(kv1.key), kv1.value))
+				// skipping the empty Optional<LocalDateBasedKey> (shouldn't ever happen)
+				.filter(it1 -> it1.key.isPresent())
+				// "kv2" below is KeyValue<Optional<LocalDateBasedKey>, Integer>
+				.map(kv2 -> KeyValue.pair(kv2.key.get(), kv2.value))
+				// "kv3" below is KeyValue<LocalDateBasedKey, Integer>
+				// Sorting "dailyTotals" (variable above) by the expenditure's day.
+				.sorted(Comparator.comparing(kv3 -> kv3.key.getTime()))
+				// logging the total expenses for each day (sorted by day)
+				.forEach(kv -> log.debug("\n\t\tClient (id) {} spent {} {} on {}", kv.key.getData(),
+						kv.value, appProperties.getCurrency(), format(kv.key.getTime())));
 	}
 
 	@Bean
