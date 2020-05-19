@@ -21,9 +21,11 @@ see http://localhost:9021/clusters
 ### client profiles
 ```bash
 ./run.sh | egrep -i "\"id\"|consumed:|ERROR[^s]|Configuration:|\s(profiles|version)\s=|Client profiles:"
+./create-command.sh config | grep 'Command('
 ./create-client-profile.sh | tee -a profile.log | egrep '"id"'
-./create-command.sh config,profiles | grep 'Command('
+./create-command.sh profiles | grep 'Command('
 ```
+Create (aka update) new profiles then see them with `./create-command.sh profiles`.  
 This won't work when using AVRO serde:
 ```bash
 bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-profiles.v2
