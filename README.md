@@ -9,7 +9,7 @@ echo $CONFLUENT_HOME; echo $PATH
 confluent local start
 confluent cluster describe --url http://localhost:8081
 confluent cluster describe --url http://localhost:8090
-kafka-topics --list --zookeeper localhost:2181 | grep -v '_'
+kafka-topics --list --zookeeper localhost:2181 | egrep -v "_|connect-"
 curl http://localhost:8081/subjects
 curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 ```
@@ -21,11 +21,12 @@ see http://localhost:9021/clusters
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
-./create-transactions.sh 1 | egrep '"time"'
+./create-transactions.sh 3 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
 ```
-- see that both AmountExceededConfig and DailyExceedsConfig need transactions KStream
+- see that both `AmountExceededConfig` and `DailyExceedsConfig` need *transactions* KStream
 - txGroupedByClientId is using a custom peek implementation
-- CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself
+- CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself!
 - [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
 
 # feature/5/joins
