@@ -9,7 +9,7 @@ echo $CONFLUENT_HOME; echo $PATH
 confluent local start
 confluent cluster describe --url http://localhost:8081
 confluent cluster describe --url http://localhost:8090
-kafka-topics --list --zookeeper localhost:2181 | grep -v '_'
+kafka-topics --list --zookeeper localhost:2181 | egrep -v "_|connect-"
 curl http://localhost:8081/subjects
 curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 ```
@@ -23,7 +23,9 @@ see http://localhost:9021/clusters
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 3 | egrep '"time"'
 ./create-command.sh daily | grep 'Command('
+./create-transactions.sh 33 | egrep '"time"'
 ```
+- check {"dailyMaxAmount":...} occurrences
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
 - careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again! 
