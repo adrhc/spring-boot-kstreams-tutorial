@@ -27,11 +27,11 @@ see http://localhost:9021/clusters
 
 # feature/2/commands
 ```bash
-./run.sh | egrep -i "client1|command received||ERROR[^s]|totals:|Configuration:|spring profiles|app version"
+./run.sh | egrep -i "client1|command received|ERROR[^s]|totals:|Configuration:|spring profiles|app version"
 # with Kafka:
-bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # with Confluent:
-bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
+kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v2
 # use:
 # {"names": ["config"]}
 ```
