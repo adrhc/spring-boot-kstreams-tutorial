@@ -21,12 +21,14 @@ import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggregation.LocalDateBasedKey;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
+import static java.util.Comparator.comparing;
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
 import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeOf;
@@ -81,19 +83,23 @@ public class CommandsConfig {
 	private void logDailyTotals(List<KeyValue<String, Integer>> dailyTotals) {
 		log.debug("\n\tDaily totals:");
 		dailyTotals.stream()
-				// "kv1" below is KeyValue<clientId-day, amount>
-				// LocalDateBasedKey is a POJO containing the day and client-id.
-				.map(kv1 -> KeyValue.pair(LocalDateBasedKey.parseWithStringData(kv1.key), kv1.value))
-				// skipping the empty Optional<LocalDateBasedKey> (shouldn't ever happen)
-				.filter(it1 -> it1.key.isPresent())
-				// "kv2" below is KeyValue<Optional<LocalDateBasedKey>, Integer>
-				.map(kv2 -> KeyValue.pair(kv2.key.get(), kv2.value))
-				// "kv3" below is KeyValue<LocalDateBasedKey, Integer>
-				// Sorting "dailyTotals" (variable above) by the expenditure's day.
-				.sorted(Comparator.comparing(kv3 -> kv3.key.getTime()))
+				/*
+				 * "kv1" below is a KeyValue<clientId-day, amount>.
+				 * LocalDateBasedKey is a POJO containing the day ("time" field) and client-id ("data" field).
+				 * Mapping to an Optional<DailyTotalSpent>.
+				 */
+				.map(kv1 -> LocalDateBasedKey.parseWithStringData(kv1.key)
+						.map(localDateBasedKey -> new DailyTotalSpent(localDateBasedKey.getData(),
+								localDateBasedKey.getTime(), kv1.value)))
+				// skipping any empty Optional (shouldn't ever happen)
+				.filter(Optional::isPresent)
+				// extracting Optional's value (i.e. DailyTotalSpent)
+				.map(Optional::get)
+				// sorting "dailyTotals" (variable above) by the expenditure's day
+				.sorted(comparing(DailyTotalSpent::getTime))
 				// logging the total expenses for each day (sorted by day)
-				.forEach(kv -> log.debug("\n\t\tClient (id) {} spent {} {} on {}", kv.key.getData(),
-						kv.value, appProperties.getCurrency(), format(kv.key.getTime())));
+				.forEach(dts -> log.debug("\n\t\tClient (id) {} spent {} {} on {}", dts.getClientId(),
+						dts.getAmount(), appProperties.getCurrency(), format(dts.getTime())));
 	}
 
 	@Bean
