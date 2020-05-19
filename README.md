@@ -28,7 +28,8 @@ see http://localhost:9021/clusters
 - check {"dailyMaxAmount":...} occurrences
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
-- careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again! 
+- careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again!
+    - run `./create-client-profile.sh | egrep '"id"'` again to see the issue 
 
 ### error
 ```
