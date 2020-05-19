@@ -17,9 +17,20 @@ see http://localhost:9021/clusters
 (disable browser cache)
 
 # feature/8/daily-exceeds-notification
+```bash
+./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|Limit|Notification|Overdue|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
+./create-client-profile.sh | egrep '"id"'
+./create-command.sh config,profiles | grep 'Command('
+./create-transactions.sh 3 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
+./create-transactions.sh 90 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
+./create-transactions.sh 1 | egrep '"time"'
+```
 - changing KTable-KTable join to KStream-KTable join
-- daily-exceeds topic is compact so can't have client-id as key (using `DailyTotalSpentKey`)
+- daily-exceeds topic is compact so can't have *client-id* as key (using `DailyTotalSpentKey`)
 - check DailyExceedsConsumer: using JsonDeserializer for key and AVRO for value
+    - observe the @KafkaListener based *Notification*
 - *.avpr does not support imports but *.avdl does (https://avro.apache.org/docs/1.9.2/idl.html#imports)
     - check daily-exceeds.avpr 
 
