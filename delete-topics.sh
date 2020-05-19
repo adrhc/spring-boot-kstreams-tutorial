@@ -22,6 +22,7 @@ $KDELETE sbkst-dailyTotalSpentGroupedByClientId-1Days-changelog
 $KDELETE sbkst-dailyTotalSpentJoinClientProfile-subscription-registration-topic
 $KDELETE sbkst-dailyTotalSpentJoinClientProfile-subscription-response-topic
 $KDELETE sbkst-dailyTotalSpentJoinClientProfile-subscription-store-changelog
+$KDELETE sbkst-dailyTotalSpentJoinClientProfile-repartition
 
 # schema deletion
 # curl http://localhost:8081/subjects

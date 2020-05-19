@@ -1,8 +1,8 @@
 package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.streams.kstream.Joined;
 import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.Named;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,6 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
-
-import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.streamOf;
 
 @Component
 @DependsOn({"dailyTotalSpentTable", "clientProfileTable"})
@@ -34,14 +32,15 @@ public class DailyExceedsConfig extends AbstractExceeds {
 
 	public void get() {
 		dailyTotalSpentTable
+				// changing the key to the client-id
+				.toStream((dailyTotalSpentKey, dailyTotalSpent) -> dailyTotalSpentKey.getClientId())
 				// clientId:DailyTotalSpent join clientId:ClientProfile
 				.join(clientProfileTable,
-						DailyTotalSpent::getClientId,
 						this::dailyExceededJoiner,
-						Named.as("dailyTotalSpentJoinClientProfile"))
+						dailyTotalSpentJoinClientProfile())
 				// skip for less than dailyMaxAmount
 				.filter((dailyTotalSpentKey, dailyExceeded) -> dailyExceeded != null)
-				.toStream(Named.as(streamOf(topicsProperties.getDailyExceeds())))
+				// logging the daily exceeds
 				.foreach((dailyTotalSpentKey, dailyExceeded) -> log.debug("\n\t{}", dailyExceeded));
 	}
 
@@ -52,5 +51,9 @@ public class DailyExceedsConfig extends AbstractExceeds {
 		log.trace("\n\tskipping daily total spent under {} {}\n\t{}\n\t{}",
 				cp.getDailyMaxAmount(), appProperties.getCurrency(), dts, cp);
 		return null;
+	}
+
+	private Joined<String, DailyTotalSpent, ClientProfile> dailyTotalSpentJoinClientProfile() {
+		return Joined.as("dailyTotalSpentJoinClientProfile");
 	}
 }

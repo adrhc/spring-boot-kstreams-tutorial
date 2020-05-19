@@ -16,6 +16,9 @@ curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 see http://localhost:9021/clusters  
 (disable browser cache)
 
+# feature/8/daily-exceeds-notification
+- changing KTable-KTable join to KStream-KTable join
+
 # feature/7/daily-exceeds
 ```bash
 ./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
