@@ -18,6 +18,7 @@ see http://localhost:9021/clusters
 
 # feature/8/daily-exceeds-notification
 - changing KTable-KTable join to KStream-KTable join
+- daily-exceeds topic is compact so can't have client-id as key (using `DailyTotalSpentKey`)
 
 # feature/7/daily-exceeds
 ```bash

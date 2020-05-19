@@ -1,10 +1,13 @@
 package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Joined;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Produced;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
+import org.springframework.kafka.support.serializer.JsonSerde;
 import org.springframework.stereotype.Component;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
@@ -21,12 +24,14 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles
 public class DailyExceedsConfig extends AbstractExceeds {
 	private final KTable<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentTable;
 	private final KTable<String, ClientProfile> clientProfileTable;
+	private final JsonSerde<DailyTotalSpentKey> dailyTotalSpentKeySerde;
 	private final AppProperties appProperties;
 
-	public DailyExceedsConfig(TopicsProperties topicsProperties, KTable<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentTable, KTable<String, ClientProfile> clientProfileTable, AppProperties appProperties) {
+	public DailyExceedsConfig(TopicsProperties topicsProperties, KTable<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentTable, KTable<String, ClientProfile> clientProfileTable, JsonSerde<DailyTotalSpentKey> dailyTotalSpentKeySerde, AppProperties appProperties) {
 		super(topicsProperties);
 		this.dailyTotalSpentTable = dailyTotalSpentTable;
 		this.clientProfileTable = clientProfileTable;
+		this.dailyTotalSpentKeySerde = dailyTotalSpentKeySerde;
 		this.appProperties = appProperties;
 	}
 
@@ -39,9 +44,16 @@ public class DailyExceedsConfig extends AbstractExceeds {
 						this::dailyExceededJoiner,
 						dailyTotalSpentJoinClientProfile())
 				// skip for less than dailyMaxAmount
-				.filter((dailyTotalSpentKey, dailyExceeded) -> dailyExceeded != null)
+				.filter((clientId, dailyExceeded) -> dailyExceeded != null)
 				// logging the daily exceeds
-				.foreach((dailyTotalSpentKey, dailyExceeded) -> log.debug("\n\t{}", dailyExceeded));
+				.peek((clientId, dailyExceeded) -> log.debug("\n\t{}", dailyExceeded))
+				.map(this::dailyTotalSpentKey)
+				.to(topicsProperties.getDailyExceeds(), produceDailyExceeded());
+	}
+
+	private KeyValue<DailyTotalSpentKey, DailyExceeded> dailyTotalSpentKey(String clientId, DailyExceeded dailyExceeded) {
+		return KeyValue.pair(new DailyTotalSpentKey(clientId,
+				dailyExceeded.getDailyTotalSpent().getTime()), dailyExceeded);
 	}
 
 	private DailyExceeded dailyExceededJoiner(DailyTotalSpent dts, ClientProfile cp) {
@@ -55,5 +67,11 @@ public class DailyExceedsConfig extends AbstractExceeds {
 
 	private Joined<String, DailyTotalSpent, ClientProfile> dailyTotalSpentJoinClientProfile() {
 		return Joined.as("dailyTotalSpentJoinClientProfile");
+	}
+
+	private Produced<DailyTotalSpentKey, DailyExceeded> produceDailyExceeded() {
+		return Produced.<DailyTotalSpentKey, DailyExceeded>
+				as(topicsProperties.getDailyExceeds())
+				.withKeySerde(dailyTotalSpentKeySerde);
 	}
 }

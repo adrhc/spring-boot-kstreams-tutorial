@@ -16,7 +16,6 @@ $KDELETE sbkst.commands.v2
 $KDELETE sbkst.client-profiles.v2
 $KDELETE sbkst.transactions.v2
 $KDELETE sbkst.daily-exceeds.v2
-$KDELETE sbkst.daily-exceeds.v2
 $KDELETE sbkst.daily-total-spent.v2
 $KDELETE sbkst-dailyTotalSpentGroupedByClientId-1Days-changelog
 $KDELETE sbkst-dailyTotalSpentJoinClientProfile-subscription-registration-topic
