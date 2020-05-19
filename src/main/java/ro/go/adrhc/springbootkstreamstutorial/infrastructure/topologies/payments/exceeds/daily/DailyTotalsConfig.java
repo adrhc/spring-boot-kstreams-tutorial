@@ -53,15 +53,15 @@ public class DailyTotalsConfig extends AbstractExceeds {
 		KGroupedStream<String, Transaction> txGroupedByCli = txGroupedByClientId(transactions);
 
 		txGroupedByCli
-				// group by 1 day
+				// expenses grouped by per 1 day
 				.windowedBy(TimeWindows.of(Duration.ofDays(1))
 						.grace(Duration.ofDays(appProperties.getDailyGrace())))
-				// aggregate amount per clientId-day
+				// aggregate amount spent by a client per day
 				.aggregate(() -> 0, (k, v, sum) -> sum + v.getAmount(),
 						dailyTotalSpentByClientId(appProperties.getDailyGrace() + 1, 1, DAYS))
-				// clientIdDay:amount
+				// computes a new key (i.e. clientId-day) for each record e.g. 1-2020.05.02
 				.toStream((win, amount) -> keyOf(win))
-				// save clientIdDay:amount into a compact stream (aka table)
+				// saves clientId-day:amount record into a compact stream (aka table)
 				.to(topicsProperties.getDailyTotalSpent());
 	}
 
@@ -71,7 +71,7 @@ public class DailyTotalsConfig extends AbstractExceeds {
 	private KGroupedStream<String, Transaction> txGroupedByClientId(
 			KStreamEx<String, Transaction> transactions) {
 		return transactions
-				// log expenses (using custom peek implementation)
+				// log expenses using a custom peek implementation
 				.peek(it -> {
 					log.trace("\n\ttopic: {}\n\ttimestamp: {}",
 							it.context.topic(), localDateTimeOf(it.context.timestamp()));
@@ -79,6 +79,7 @@ public class DailyTotalsConfig extends AbstractExceeds {
 							appProperties.getCurrency(), format(it.value.getTime()));
 					it.context.headers().forEach(h -> log.trace(h.toString()));
 				})
+				// the key is the client-id
 				.groupByKey(Grouped.as("transactionsGroupedByClientId"));
 	}
 }
