@@ -72,7 +72,7 @@ public class CommandsConfig {
 				.filter((k, cmd) -> cmd.getNames().contains("daily"))
 				// querying dailyTotalSpentStore to get a List<KeyValue<clientId-day, amount>>
 				.<String, Integer>allOf(dailyTotalSpentStore)
-				// The variable "list" below is a List<KeyValue<clientId-day, amount>>.
+				// "dailyTotalsList" below is a List<KeyValue<clientId-day, amount>>
 				.foreach((k, dailyTotalsList) -> this.logDailyTotals(dailyTotalsList));
 
 		return commands;
