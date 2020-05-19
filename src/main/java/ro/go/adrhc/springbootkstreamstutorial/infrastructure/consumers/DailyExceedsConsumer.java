@@ -15,6 +15,12 @@ public class DailyExceedsConsumer {
 
 	public DailyExceedsConsumer(PhoneMessageSender phoneMessageSender) {this.phoneMessageSender = phoneMessageSender;}
 
+	/**
+	 * key.deserializer: https://kafka.apache.org/documentation/#key.deserializer
+	 * value.deserializer: https://kafka.apache.org/documentation/#value.deserializer
+	 * SpecificAvroDeserializer needs schema.registry.url.
+	 * JsonDeserializer must use a certain type specified with spring.json.key.default.type.
+	 */
 	@KafkaListener(id = "dailyExceedsNotifier", topics = "${topic.daily-exceeds}",
 			clientIdPrefix = "dailyExceedsConsumer", properties = {
 			"schema.registry.url=${schema.registry.url}",
