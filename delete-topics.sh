@@ -18,7 +18,7 @@ $KDELETE sbkst.transactions.v2
 $KDELETE sbkst.daily-exceeds.v2
 $KDELETE sbkst.daily-exceeds.v2
 $KDELETE sbkst.daily-total-spent.v2
-$KDELETE sbkst-dailyTotalSpentByClientId-1Days-changelog
+$KDELETE sbkst-dailyTotalSpentGroupedByClientId-1Days-changelog
 
 # schema deletion
 # curl http://localhost:8081/subjects
@@ -26,4 +26,5 @@ $KDELETE sbkst-dailyTotalSpentByClientId-1Days-changelog
 curl -X DELETE http://localhost:8081/subjects/sbkst.client-profiles.v2-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-sbkst.client-profiles.v2-changelog-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-sbkst.client-profiles.v2-store-changelog-value
+#curl -X DELETE http://localhost:8081/subjects/sbkst-dailyTotalSpentGroupedByClientId-1Days-changelog-value
 curl -X DELETE http://localhost:8081/subjects/sbkst.transactions.v2-value

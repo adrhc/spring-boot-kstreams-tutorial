@@ -13,6 +13,7 @@ import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
 
 import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeOf;
+import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.tableOf;
 
 @Configuration
 @Profile("!test")
@@ -28,7 +29,7 @@ public class ProfilesConfig {
 	@Bean
 	public KTable<String, ClientProfile> clientProfileTable(StreamsBuilder streamsBuilder) {
 		return streamsBuilder.table(topicsProperties.getClientProfiles(),
-				Consumed.as(topicsProperties.getClientProfiles() + "-consumer"),
+				Consumed.as(tableOf(topicsProperties.getClientProfiles())),
 				Materialized.as(storeOf(topicsProperties.getClientProfiles())));
 	}
 

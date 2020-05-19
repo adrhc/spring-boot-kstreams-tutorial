@@ -15,6 +15,7 @@ import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
 
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
+import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.streamOf;
 
 @Configuration
 @Profile("!test")
@@ -40,6 +41,6 @@ public class ExceedsConfig extends AbstractExceeds {
 
 	protected KStreamEx<String, Transaction> transactionsStream(StreamsBuilderEx streamsBuilder) {
 		return streamsBuilder.stream(topicsProperties.getTransactions(),
-				Consumed.as(topicsProperties.getTransactions()));
+				Consumed.as(streamOf(topicsProperties.getTransactions())));
 	}
 }

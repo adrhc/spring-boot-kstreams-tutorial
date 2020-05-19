@@ -16,6 +16,17 @@ curl http://localhost:8081/subjects/sbkst.client-profiles.v2-value/versions
 see http://localhost:9021/clusters  
 (disable browser cache)
 
+# feature/7/daily-exceeds
+- mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
+- simplified daily total spent report (see `CommandsConfig`)
+
+### error
+```
+Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected array or string.
+ at [Source: (byte[])"{"clientId":"1","time":{"year":2020,"month":"MAY","chronology":{"id":"ISO","calendarType":"iso8601"},"dayOfWeek":"SUNDAY","dayOfYear":138,"era":"CE","monthValue":5,"dayOfMonth":17,"leapYear":true}}"; line: 1, column: 24] (through reference chain: ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey["time"])
+```
+**solution:** import `<artifactId>spring-boot-starter-json</artifactId>`
+
 # feature/6/windowing
 ```bash
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
