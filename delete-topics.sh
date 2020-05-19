@@ -36,3 +36,5 @@ curl -X DELETE http://localhost:8081/subjects/sbkst-dailyTotalSpentJoinClientPro
 curl -X DELETE http://localhost:8081/subjects/dailyTotalSpentJoinClientProfile-subscription-registration-topic-vh-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-dailyTotalSpentJoinClientProfile-subscription-response-topic-join-resolver-value
 curl -X DELETE http://localhost:8081/subjects/sbkst-sbkst.daily-total-spent.v2-store-changelog-value
+curl -X DELETE http://localhost:8081/subjects/sbkst.daily-exceeds.v2-value
+curl -X DELETE http://localhost:8081/subjects/sbkst-dailyTotalSpentJoinClientProfile-repartition-value

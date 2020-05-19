@@ -30,7 +30,8 @@ see http://localhost:9021/clusters
 ```
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
-- careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again! 
+- careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again!
+- check DailyExceedsConsumer: using JsonDeserializer for key and AVRO for value 
 
 ### error
 ```
