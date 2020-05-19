@@ -11,7 +11,7 @@ import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.amount.AmountExceededConfig;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.DailyExceedsConfig;
+import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.DailyTotalsConfig;
 import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
 
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
@@ -21,12 +21,12 @@ import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 @Slf4j
 public class ExceedsConfig extends AbstractExceeds {
 	private final AmountExceededConfig amountExceededConfig;
-	private final DailyExceedsConfig dailyExceedsConfig;
+	private final DailyTotalsConfig dailyTotalsConfig;
 
-	protected ExceedsConfig(TopicsProperties topicsProperties, AmountExceededConfig amountExceededConfig, DailyExceedsConfig dailyExceedsConfig) {
+	protected ExceedsConfig(TopicsProperties topicsProperties, AmountExceededConfig amountExceededConfig, DailyTotalsConfig dailyTotalsConfig) {
 		super(topicsProperties);
 		this.amountExceededConfig = amountExceededConfig;
-		this.dailyExceedsConfig = dailyExceedsConfig;
+		this.dailyTotalsConfig = dailyTotalsConfig;
 	}
 
 	@Bean
@@ -34,7 +34,7 @@ public class ExceedsConfig extends AbstractExceeds {
 		StreamsBuilderEx streamsBuilder = from(pStreamsBuilder);
 		KStreamEx<String, Transaction> transactions = transactionsStream(streamsBuilder);
 		amountExceededConfig.accept(transactions);
-		dailyExceedsConfig.accept(transactions);
+		dailyTotalsConfig.accept(transactions);
 		return transactions;
 	}
 

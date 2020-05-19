@@ -18,7 +18,7 @@ import static ro.go.adrhc.kafkastreamsextensions.streams.kstream.operators.aggre
 /**
  * Takes all data from storeName into a list of T; the list is the transformer's "value".
  *
- * @param <T> is something that can be created based on: String clientId, LocalDate time, Integer amount.
+ * @param <T> is something that can be created based on: String client-id, LocalDate time, Integer amount.
  */
 public abstract class AbstractTotalSpentValueTransformerSupp<T> implements ValueTransformerSupplier<Command, List<T>> {
 	private final String storeName;

@@ -27,10 +27,10 @@ import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
 @Component
 @Profile("!test")
 @Slf4j
-public class DailyExceedsConfig extends AbstractExceeds {
+public class DailyTotalsConfig extends AbstractExceeds {
 	private final AppProperties appProperties;
 
-	public DailyExceedsConfig(TopicsProperties topicsProperties, AppProperties appProperties) {
+	public DailyTotalsConfig(TopicsProperties topicsProperties, AppProperties appProperties) {
 		super(topicsProperties);
 		this.appProperties = appProperties;
 	}
@@ -49,7 +49,7 @@ public class DailyExceedsConfig extends AbstractExceeds {
 	 * using Tumbling time window
 	 */
 	public void accept(KStreamEx<String, Transaction> transactions) {
-		// total expenses per day
+		// expenses grouped by client-id
 		KGroupedStream<String, Transaction> txGroupedByCli = txGroupedByClientId(transactions);
 
 		txGroupedByCli
@@ -66,7 +66,7 @@ public class DailyExceedsConfig extends AbstractExceeds {
 	}
 
 	/**
-	 * group transactions by clientId
+	 * group transactions by client-id
 	 */
 	private KGroupedStream<String, Transaction> txGroupedByClientId(
 			KStreamEx<String, Transaction> transactions) {
