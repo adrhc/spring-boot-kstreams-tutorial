@@ -1,0 +1,5 @@
+*.avpr -linguist-detectable
+*.java linguist-detectable
+*.png -linguist-detectable
+*.sh -linguist-detectable
+*.xml -linguist-detectable
