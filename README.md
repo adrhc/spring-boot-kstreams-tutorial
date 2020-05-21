@@ -32,7 +32,8 @@ see http://localhost:9021/clusters
 - check DailyExceedsConsumer: using JsonDeserializer for key and AVRO for value
     - observe the @KafkaListener based *Notification*
 - *.avpr does not support imports but *.avdl does (https://avro.apache.org/docs/1.9.2/idl.html#imports)
-    - check daily-exceeds.avpr 
+    - check daily-exceeds.avpr
+- see consumer's isolation-level (read_committed) matching streams processing guarantee (exactly_once) 
 
 # feature/7/daily-exceeds
 ```bash
