@@ -34,7 +34,7 @@ see http://localhost:9021/clusters
 - *.avpr does not support imports but *.avdl does (https://avro.apache.org/docs/1.9.2/idl.html#imports)
     - check daily-exceeds.avpr
 - see consumer's isolation-level (read_committed) matching streams processing guarantee (exactly_once) 
-
+    - see [4.6 Message Delivery Semantics](https://kafka.apache.org/documentation/#semantics) for *isolation-level*
 # feature/7/daily-exceeds
 ```bash
 ./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|Limit|Notification|Overdue|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
