@@ -35,8 +35,8 @@ public class ReportsConfig {
 	@Bean
 	public KStream<byte[], Command> reportingCommands(StreamsBuilder streamsBuilder) {
 		KStream<byte[], Command> commands = commandsStream(streamsBuilder);
-		commands.foreach((k, c) -> {
-			log.debug("\n\tcommand received: {}", c);
+		commands.foreach((k, command) -> {
+			log.debug("\n\tcommand received: {}", command);
 			log.debug("\n\tConfiguration:\n\t\tspring profiles = {}\n\t\tapp version = {}",
 					env.getActiveProfiles(), appProperties.getVersion());
 		}, Named.as("commandsReceiver"));

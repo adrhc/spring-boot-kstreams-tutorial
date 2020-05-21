@@ -21,9 +21,6 @@ spring:
           optimization: all
         processing:
           guarantee: exactly_once
-schema:
-  registry:
-    url: http://localhost:8081
 topic:
   prefix: ${spring.application.name}
   commands: ${topic.prefix}.commands.${app.version}
