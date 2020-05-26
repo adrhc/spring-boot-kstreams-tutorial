@@ -50,7 +50,7 @@ see http://localhost:9021/clusters
 ### error
 ```
 Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected array or string.
- at [Source: (byte[])"{"clientId":"1","time":{"year":2020,"month":"MAY","chronology":{"id":"ISO","calendarType":"iso8601"},"dayOfWeek":"SUNDAY","dayOfYear":138,"era":"CE","monthValue":5,"dayOfMonth":17,"leapYear":true}}"; line: 1, column: 24] (through reference chain: ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey["time"])
+ at [Source: (byte[])"{"clientId":"1","time":{"year":2020,"month":"MAY","chronology":{"id":"ISO","calendarType":"iso8601"},"dayOfWeek":"SUNDAY","dayOfYear":138,"era":"CE","monthValue":5,"dayOfMonth":17,"leapYear":true}}"; line: 1, column: 24] (through reference chain: ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey["time"])
 ```
 **solution:** import `<artifactId>spring-boot-starter-json</artifactId>`
 
@@ -115,7 +115,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 
 ##### error
 ```
-InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
 **solution:** use `@NoArgsConstructor` on `Command`
 

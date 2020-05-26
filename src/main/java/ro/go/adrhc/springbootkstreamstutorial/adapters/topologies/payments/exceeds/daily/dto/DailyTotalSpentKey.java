@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.dto;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.dto;
 
 import lombok.*;
 

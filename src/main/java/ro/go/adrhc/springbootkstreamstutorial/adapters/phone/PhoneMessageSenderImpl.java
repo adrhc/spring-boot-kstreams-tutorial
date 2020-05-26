@@ -1,10 +1,10 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.phone;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.phone;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
 
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
 

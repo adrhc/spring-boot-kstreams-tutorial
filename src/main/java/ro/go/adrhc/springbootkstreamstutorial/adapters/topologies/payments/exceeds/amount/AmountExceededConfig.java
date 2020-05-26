@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.amount;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.amount;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.kstream.Joined;
@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.AbstractExceeds;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.AbstractExceeds;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile;
 
 @Component
 @DependsOn("clientProfileTable")

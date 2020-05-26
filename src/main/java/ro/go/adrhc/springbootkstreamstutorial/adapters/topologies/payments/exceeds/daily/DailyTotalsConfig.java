@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
@@ -14,10 +14,10 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.AbstractExceeds;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.AbstractExceeds;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction;
 
 import java.time.Duration;
 

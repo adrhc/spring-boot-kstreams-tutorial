@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds;
 
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
 

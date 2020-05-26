@@ -1,11 +1,11 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.consumers;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.consumers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.phone.PhoneMessageSender;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.phone.PhoneMessageSender;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded;
 
 @Profile("!test")
 @Component
@@ -25,11 +25,11 @@ public class DailyExceedsConsumer {
 			clientIdPrefix = "dailyExceedsConsumer", properties = {
 			"schema.registry.url=${schema.registry.url}",
 			"spring.json.trusted.packages=ro.go.adrhc.springbootkstreamstutorial" +
-					".infrastructure.topologies.payments.exceeds.daily.dto",
+					".adapters.topologies.payments.exceeds.daily.dto",
 			"key.deserializer=org.springframework.kafka.support.serializer.JsonDeserializer",
 			"value.deserializer=io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer",
 			"spring.json.key.default.type=ro.go.adrhc.springbootkstreamstutorial" +
-					".infrastructure.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey"})
+					".adapters.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey"})
 	public void consume(DailyExceeded de) {
 		phoneMessageSender.send(de);
 	}

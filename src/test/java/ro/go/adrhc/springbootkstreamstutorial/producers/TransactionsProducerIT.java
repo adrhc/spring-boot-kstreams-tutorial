@@ -16,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.KafkaTemplateConfig;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction;
 
 import java.time.Instant;
 import java.time.LocalDate;
