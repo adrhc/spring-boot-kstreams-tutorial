@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.support.serializer.JsonSerde;
 import org.springframework.stereotype.Component;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.AbstractExceeds;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.dto.DailyTotalSpentKey;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded;

@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.config;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.config;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

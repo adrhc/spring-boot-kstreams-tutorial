@@ -9,7 +9,7 @@ import org.apache.kafka.streams.kstream.Materialized;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile;
 
 import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeOf;

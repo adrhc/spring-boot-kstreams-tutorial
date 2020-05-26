@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import ro.go.adrhc.springbootkstreamstutorial.config.KafkaTemplateConfig;
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds;
 
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 
 public abstract class AbstractExceeds {
 	protected final TopicsProperties topicsProperties;

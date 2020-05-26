@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.amount.AmountExceededConfig;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.DailyExceedsConfig;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.DailyTotalsConfig;

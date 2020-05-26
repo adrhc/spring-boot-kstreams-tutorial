@@ -14,7 +14,7 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
-import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
