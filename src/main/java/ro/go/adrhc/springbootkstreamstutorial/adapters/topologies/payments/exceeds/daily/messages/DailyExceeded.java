@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class DailyExceeded extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8250769571509183868L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DailyExceeded\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages\",\"fields\":[{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"dailyTotalSpent\",\"type\":{\"type\":\"record\",\"name\":\"DailyTotalSpent\",\"fields\":[{\"name\":\"clientId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"time\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"amount\",\"type\":\"int\"}]}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  private static final long serialVersionUID = 6688519586065331349L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DailyExceeded\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages\",\"fields\":[{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"dailyTotalSpent\",\"type\":{\"type\":\"record\",\"name\":\"DailyTotalSpent\",\"fields\":[{\"name\":\"clientId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"time\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"amount\",\"type\":\"int\"}]}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -75,7 +75,7 @@ static {
   }
 
    private int dailyMaxAmount;
-   private ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent;
+   private ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent;
    private java.lang.String name;
    private java.lang.String surname;
    private java.lang.String email;
@@ -97,7 +97,7 @@ static {
    * @param email The new value for email
    * @param phone The new value for phone
    */
-  public DailyExceeded(java.lang.Integer dailyMaxAmount, ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent, java.lang.String name, java.lang.String surname, java.lang.String email, java.lang.String phone) {
+  public DailyExceeded(java.lang.Integer dailyMaxAmount, ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent, java.lang.String name, java.lang.String surname, java.lang.String email, java.lang.String phone) {
     this.dailyMaxAmount = dailyMaxAmount;
     this.dailyTotalSpent = dailyTotalSpent;
     this.name = name;
@@ -126,7 +126,7 @@ static {
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: dailyMaxAmount = (java.lang.Integer)value$; break;
-    case 1: dailyTotalSpent = (ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent)value$; break;
+    case 1: dailyTotalSpent = (ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent)value$; break;
     case 2: name = value$ != null ? value$.toString() : null; break;
     case 3: surname = value$ != null ? value$.toString() : null; break;
     case 4: email = value$ != null ? value$.toString() : null; break;
@@ -156,7 +156,7 @@ static {
    * Gets the value of the 'dailyTotalSpent' field.
    * @return The value of the 'dailyTotalSpent' field.
    */
-  public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent getDailyTotalSpent() {
+  public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent getDailyTotalSpent() {
     return dailyTotalSpent;
   }
 
@@ -165,7 +165,7 @@ static {
    * Sets the value of the 'dailyTotalSpent' field.
    * @param value the value to set.
    */
-  public void setDailyTotalSpent(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent value) {
+  public void setDailyTotalSpent(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent value) {
     this.dailyTotalSpent = value;
   }
 
@@ -241,8 +241,8 @@ static {
    * Creates a new DailyExceeded RecordBuilder.
    * @return A new DailyExceeded RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder() {
-    return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder() {
+    return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
   }
 
   /**
@@ -250,11 +250,11 @@ static {
    * @param other The existing builder to copy.
    * @return A new DailyExceeded RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder(other);
     }
   }
 
@@ -263,11 +263,11 @@ static {
    * @param other The existing instance to copy.
    * @return A new DailyExceeded RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder(other);
     }
   }
 
@@ -279,8 +279,8 @@ static {
     implements org.apache.avro.data.RecordBuilder<DailyExceeded> {
 
     private int dailyMaxAmount;
-    private ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent;
-    private ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder dailyTotalSpentBuilder;
+    private ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent dailyTotalSpent;
+    private ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder dailyTotalSpentBuilder;
     private java.lang.String name;
     private java.lang.String surname;
     private java.lang.String email;
@@ -295,7 +295,7 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.dailyMaxAmount)) {
         this.dailyMaxAmount = data().deepCopy(fields()[0].schema(), other.dailyMaxAmount);
@@ -306,7 +306,7 @@ static {
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (other.hasDailyTotalSpentBuilder()) {
-        this.dailyTotalSpentBuilder = ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder(other.getDailyTotalSpentBuilder());
+        this.dailyTotalSpentBuilder = ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder(other.getDailyTotalSpentBuilder());
       }
       if (isValidValue(fields()[2], other.name)) {
         this.name = data().deepCopy(fields()[2].schema(), other.name);
@@ -330,7 +330,7 @@ static {
      * Creates a Builder by copying an existing DailyExceeded instance
      * @param other The existing instance to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.dailyMaxAmount)) {
         this.dailyMaxAmount = data().deepCopy(fields()[0].schema(), other.dailyMaxAmount);
@@ -373,7 +373,7 @@ static {
       * @param value The value of 'dailyMaxAmount'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyMaxAmount(int value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyMaxAmount(int value) {
       validate(fields()[0], value);
       this.dailyMaxAmount = value;
       fieldSetFlags()[0] = true;
@@ -393,7 +393,7 @@ static {
       * Clears the value of the 'dailyMaxAmount' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearDailyMaxAmount() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearDailyMaxAmount() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -402,7 +402,7 @@ static {
       * Gets the value of the 'dailyTotalSpent' field.
       * @return The value.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent getDailyTotalSpent() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent getDailyTotalSpent() {
       return dailyTotalSpent;
     }
 
@@ -412,7 +412,7 @@ static {
       * @param value The value of 'dailyTotalSpent'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyTotalSpent(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyTotalSpent(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent value) {
       validate(fields()[1], value);
       this.dailyTotalSpentBuilder = null;
       this.dailyTotalSpent = value;
@@ -432,12 +432,12 @@ static {
      * Gets the Builder instance for the 'dailyTotalSpent' field and creates one if it doesn't exist yet.
      * @return This builder.
      */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder getDailyTotalSpentBuilder() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder getDailyTotalSpentBuilder() {
       if (dailyTotalSpentBuilder == null) {
         if (hasDailyTotalSpent()) {
-          setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder(dailyTotalSpent));
+          setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder(dailyTotalSpent));
         } else {
-          setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder());
+          setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.newBuilder());
         }
       }
       return dailyTotalSpentBuilder;
@@ -448,7 +448,7 @@ static {
      * @param value The builder instance that must be set.
      * @return This builder.
      */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setDailyTotalSpentBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent.Builder value) {
       clearDailyTotalSpent();
       dailyTotalSpentBuilder = value;
       return this;
@@ -466,7 +466,7 @@ static {
       * Clears the value of the 'dailyTotalSpent' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearDailyTotalSpent() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearDailyTotalSpent() {
       dailyTotalSpent = null;
       dailyTotalSpentBuilder = null;
       fieldSetFlags()[1] = false;
@@ -487,7 +487,7 @@ static {
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setName(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setName(java.lang.String value) {
       validate(fields()[2], value);
       this.name = value;
       fieldSetFlags()[2] = true;
@@ -507,7 +507,7 @@ static {
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearName() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearName() {
       name = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -527,7 +527,7 @@ static {
       * @param value The value of 'surname'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setSurname(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setSurname(java.lang.String value) {
       validate(fields()[3], value);
       this.surname = value;
       fieldSetFlags()[3] = true;
@@ -547,7 +547,7 @@ static {
       * Clears the value of the 'surname' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearSurname() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearSurname() {
       surname = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -567,7 +567,7 @@ static {
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setEmail(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setEmail(java.lang.String value) {
       validate(fields()[4], value);
       this.email = value;
       fieldSetFlags()[4] = true;
@@ -587,7 +587,7 @@ static {
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearEmail() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearEmail() {
       email = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -607,7 +607,7 @@ static {
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setPhone(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder setPhone(java.lang.String value) {
       validate(fields()[5], value);
       this.phone = value;
       fieldSetFlags()[5] = true;
@@ -627,7 +627,7 @@ static {
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearPhone() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyExceeded.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -647,7 +647,7 @@ static {
             throw e;
           }
         } else {
-          record.dailyTotalSpent = fieldSetFlags()[1] ? this.dailyTotalSpent : (ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages.DailyTotalSpent) defaultValue(fields()[1]);
+          record.dailyTotalSpent = fieldSetFlags()[1] ? this.dailyTotalSpent : (ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages.DailyTotalSpent) defaultValue(fields()[1]);
         }
         record.name = fieldSetFlags()[2] ? this.name : (java.lang.String) defaultValue(fields()[2]);
         record.surname = fieldSetFlags()[3] ? this.surname : (java.lang.String) defaultValue(fields()[3]);

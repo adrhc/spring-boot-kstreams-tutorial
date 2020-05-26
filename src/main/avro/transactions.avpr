@@ -1,5 +1,5 @@
 {
-  "namespace": "ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages",
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages",
   "protocol": "PaymentsProtocol",
   "doc": "payments protocol",
   "types": [

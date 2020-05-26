@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Transaction extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6580086156932961733L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transaction\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages\",\"fields\":[{\"name\":\"time\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"merchantId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"clientId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"amount\",\"type\":\"int\"}]}");
+  private static final long serialVersionUID = -8000570210748407601L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transaction\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages\",\"fields\":[{\"name\":\"time\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"merchantId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"clientId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"amount\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -211,8 +211,8 @@ static {
    * Creates a new Transaction RecordBuilder.
    * @return A new Transaction RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder newBuilder() {
-    return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder();
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder newBuilder() {
+    return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder();
   }
 
   /**
@@ -220,11 +220,11 @@ static {
    * @param other The existing builder to copy.
    * @return A new Transaction RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder(other);
     }
   }
 
@@ -233,11 +233,11 @@ static {
    * @param other The existing instance to copy.
    * @return A new Transaction RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder(other);
     }
   }
 
@@ -262,7 +262,7 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.time)) {
         this.time = data().deepCopy(fields()[0].schema(), other.time);
@@ -286,7 +286,7 @@ static {
      * Creates a Builder by copying an existing Transaction instance
      * @param other The existing instance to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.time)) {
         this.time = data().deepCopy(fields()[0].schema(), other.time);
@@ -320,7 +320,7 @@ static {
       * @param value The value of 'time'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder setTime(java.time.LocalDate value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder setTime(java.time.LocalDate value) {
       validate(fields()[0], value);
       this.time = value;
       fieldSetFlags()[0] = true;
@@ -340,7 +340,7 @@ static {
       * Clears the value of the 'time' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder clearTime() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder clearTime() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -359,7 +359,7 @@ static {
       * @param value The value of 'merchantId'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder setMerchantId(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder setMerchantId(java.lang.String value) {
       validate(fields()[1], value);
       this.merchantId = value;
       fieldSetFlags()[1] = true;
@@ -379,7 +379,7 @@ static {
       * Clears the value of the 'merchantId' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder clearMerchantId() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder clearMerchantId() {
       merchantId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -399,7 +399,7 @@ static {
       * @param value The value of 'clientId'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder setClientId(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder setClientId(java.lang.String value) {
       validate(fields()[2], value);
       this.clientId = value;
       fieldSetFlags()[2] = true;
@@ -419,7 +419,7 @@ static {
       * Clears the value of the 'clientId' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder clearClientId() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder clearClientId() {
       clientId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -439,7 +439,7 @@ static {
       * @param value The value of 'amount'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder setAmount(int value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder setAmount(int value) {
       validate(fields()[3], value);
       this.amount = value;
       fieldSetFlags()[3] = true;
@@ -459,7 +459,7 @@ static {
       * Clears the value of the 'amount' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction.Builder clearAmount() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction.Builder clearAmount() {
       fieldSetFlags()[3] = false;
       return this;
     }
