@@ -17,6 +17,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @TestConfiguration
 public class KafkaTemplateConfig {
@@ -49,15 +50,27 @@ public class KafkaTemplateConfig {
 	public KafkaTemplate<String, Command> commandKTemplate(
 			ObjectProvider<RecordMessageConverter> messageConverter) {
 		return kafkaTemplateImpl(properties.getProducer().getClientId() + "-command",
-				new JsonSerializer<>(), messageConverter);
+				new JsonSerializer<>(), messageConverter, null);
 	}
 
 	private <V> KafkaTemplate<String, V> kafkaTemplateImpl(
 			String clientIdPrefix, Serializer<V> valueSerializer,
 			ObjectProvider<RecordMessageConverter> messageConverter) {
+		return kafkaTemplateImpl(clientIdPrefix, valueSerializer, messageConverter, null);
+	}
+
+	private <V> KafkaTemplate<String, V> kafkaTemplateImpl(
+			String clientIdPrefix, Serializer<V> valueSerializer,
+			ObjectProvider<RecordMessageConverter> messageConverter,
+			Map<String, String> typeMappings) {
 		// producer config
 		Map<String, Object> config = this.properties.buildProducerProperties();
 		config.put(ProducerConfig.CLIENT_ID_CONFIG, clientIdPrefix + "-producer");
+		if (typeMappings != null) {
+			config.put(JsonSerializer.TYPE_MAPPINGS,
+					typeMappings.entrySet().stream().map(e -> e.getKey() + ":" + e.getValue())
+							.collect(Collectors.joining(",")));
+		}
 		// producer factory
 		DefaultKafkaProducerFactory<String, V> factory = new DefaultKafkaProducerFactory<>(config);
 		factory.setValueSerializer(valueSerializer);
