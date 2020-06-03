@@ -43,12 +43,22 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
-./create-transactions.sh 1 | egrep '"time"'
+./create-transactions.sh 3 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
 ```
-- see that both AmountExceededConfig and DailyExceedsConfig need transactions KStream
-- txGroupedByClientId is using a custom peek implementation
-- CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself
+
+### highlights
+- see that both `AmountExceededConfig` and `DailyTotalsConfig` need *transactions* `KStream`
+    - see `ExceedsConfig` for *transactions* `KStream` declaration
+- *txGroupedByClientId* is using a custom *peek* implementation
+    - see `it.context` usage
+    - one could use `it.context.offset` to implement a [fencing token](http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) 
+- `CommandsConfig` needs only the store of *dailyTotalSpent* `KTable` but not the `KTable` itself!
 - [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
+- *windowedBy*: it's just *groupBy* some duration
+    - see [Hopping time windows](https://kafka.apache.org/25/images/streams-time-windows-hopping.png)
+    - see [Tumbling time windows](https://kafka.apache.org/25/images/streams-time-windows-tumbling.png)
+- `aggregate`: output data to a `KTable` that's why later we need `toStream()`
 
 # feature/5/joins
 ```bash
