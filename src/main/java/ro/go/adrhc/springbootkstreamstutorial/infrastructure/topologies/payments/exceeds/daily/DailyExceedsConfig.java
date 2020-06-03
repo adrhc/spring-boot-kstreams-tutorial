@@ -32,7 +32,7 @@ public class DailyExceedsConfig extends AbstractExceeds {
 		this.appProperties = appProperties;
 	}
 
-	public void get() {
+	public void accept() {
 		dailyTotalSpentTable
 				// clientId:DailyTotalSpent join clientId:ClientProfile
 				.join(clientProfileTable,

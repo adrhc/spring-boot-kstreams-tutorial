@@ -39,7 +39,7 @@ public class ExceedsConfig extends AbstractExceeds {
 		KStreamEx<String, Transaction> transactions = transactionsStream(streamsBuilder);
 		amountExceededConfig.accept(transactions);
 		dailyTotalsConfig.accept(transactions);
-		dailyExceedsConfig.get();
+		dailyExceedsConfig.accept();
 		return transactions;
 	}
 
