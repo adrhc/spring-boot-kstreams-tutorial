@@ -24,6 +24,8 @@ see http://localhost:9021/clusters
 ./create-transactions.sh 3 | egrep '"time"'
 ./create-command.sh daily | grep 'Command('
 ```
+
+### highlights
 - see that both `AmountExceededConfig` and `DailyExceedsConfig` need *transactions* KStream
 - txGroupedByClientId is using a custom peek implementation
 - CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself!
