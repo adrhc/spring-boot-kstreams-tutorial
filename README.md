@@ -30,6 +30,23 @@ Run more times `./create-transactions.sh 3` and check the results.
 - [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
 - [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
 - [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
+- `ProfilesConfig`
+    - why `KTable`?
+    - `Materialized.as` creates an in-memory store (used by `ReportsConfig`)
+    - `Consumed.as`: using serde defaults (see application.yml)
+    - check SpringBootKstreamsTutorialApplication annotations
+- `ReportsConfig`
+    - why not `KTable`?
+    - `Consumed.as`: not using serde defaults
+    - `commands` used with `filter` instead of `branch`
+    - `<ClientProfile>allOf` relates to `Materialized.as` in `ProfilesConfig`
+- `AmountExceededConfig`
+    - `transactionsStream` using serde defaults
+    - `join` with a `KTable` is similar to a sql inner-join
+        - `amountExceededJoiner` is the values (`KStream`, `KTable`) joiner
+            - outcome (kafka value) could be null
+            - Kafka keys could contain business objects too! 
+        - `Joined.as` used to configure serde for key and values
 
 ##### error
 ```
