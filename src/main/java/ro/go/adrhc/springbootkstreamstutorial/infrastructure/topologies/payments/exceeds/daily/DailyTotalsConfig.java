@@ -61,25 +61,13 @@ public class DailyTotalsConfig extends AbstractExceeds {
 						localDateOf(win1.window().end()).minusDays(1), amount))
 				// computes a new key for the new stream (dailyTotalSpent)
 				.toStream((win2, dts) -> new DailyTotalSpentKey(dts.getClientId(), dts.getTime()))
-				// saves clientId-day:amount record into a compact stream (aka table)
+				// saves clientId-day:amount record into a compact stream (aka KTable)
 				.to(topicsProperties.getDailyTotalSpent(), dailyTotalSpentProducer());
 	}
 
-	private Materialized<String, Integer, WindowStore<Bytes, byte[]>> dailyTotalSpentByClientId(int retentionDays) {
-		return Materialized.<String, Integer, WindowStore<Bytes, byte[]>>
-				as("dailyTotalSpentGroupedByClientId-1" + DAYS.toString())
-				.withKeySerde(Serdes.String())
-				.withValueSerde(Serdes.Integer())
-				.withRetention(Duration.ofDays(retentionDays));
-	}
-
-	private Produced<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentProducer() {
-		return Produced.<DailyTotalSpentKey, DailyTotalSpent>
-				as(streamOf(topicsProperties.getDailyTotalSpent()))
-				// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
-				.withKeySerde(dailyTotalSpentKeySerde());
-	}
-
+	/**
+	 * Used by DailyExceedsConfig.
+	 */
 	@Bean
 	public KTable<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentTable(StreamsBuilder streamsBuilder) {
 		return streamsBuilder.table(topicsProperties.getDailyTotalSpent(),
@@ -114,5 +102,20 @@ public class DailyTotalsConfig extends AbstractExceeds {
 				})
 				// the key is the client-id
 				.groupByKey(Grouped.as("transactionsGroupedByClientId"));
+	}
+
+	private Materialized<String, Integer, WindowStore<Bytes, byte[]>> dailyTotalSpentByClientId(int retentionDays) {
+		return Materialized.<String, Integer, WindowStore<Bytes, byte[]>>
+				as("dailyTotalSpentGroupedByClientId-1" + DAYS.toString())
+				.withKeySerde(Serdes.String())
+				.withValueSerde(Serdes.Integer())
+				.withRetention(Duration.ofDays(retentionDays));
+	}
+
+	private Produced<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentProducer() {
+		return Produced.<DailyTotalSpentKey, DailyTotalSpent>
+				as(streamOf(topicsProperties.getDailyTotalSpent()))
+				// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
+				.withKeySerde(dailyTotalSpentKeySerde());
 	}
 }
