@@ -33,6 +33,10 @@ see http://localhost:9021/clusters
     - one could use `it.context.offset` to implement a [fencing token](http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) 
 - `CommandsConfig` needs only the store of *dailyTotalSpent* `KTable` but not the `KTable` itself!
 - [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
+- *windowedBy*: it's just *groupBy* some duration
+    - see [Hopping time windows](https://kafka.apache.org/25/images/streams-time-windows-hopping.png)
+    - see [Tumbling time windows](https://kafka.apache.org/25/images/streams-time-windows-tumbling.png)
+- `aggregate`: output data to a `KTable` that's why later we need `toStream()`
 
 # feature/5/joins
 ```bash
