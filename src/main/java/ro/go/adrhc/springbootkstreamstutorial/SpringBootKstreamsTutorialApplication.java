@@ -13,6 +13,5 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 public class SpringBootKstreamsTutorialApplication {
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(SpringBootKstreamsTutorialApplication.class, args);
-		Thread.sleep(Long.MAX_VALUE);
 	}
 }
