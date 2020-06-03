@@ -29,6 +29,8 @@ see http://localhost:9021/clusters
 - see that both `AmountExceededConfig` and `DailyTotalsConfig` need *transactions* `KStream`
     - see `ExceedsConfig` for *transactions* `KStream` declaration
 - *txGroupedByClientId* is using a custom *peek* implementation
+    - see `it.context` usage
+    - one could use `it.context.offset` to implement a [fencing token](http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) 
 - `CommandsConfig` needs only the store of *dailyTotalSpent* `KTable` but not the `KTable` itself!
 - [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
 
