@@ -43,18 +43,16 @@ see http://localhost:9021/clusters
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|Transaction):|ERROR[^s]|\s(profiles|version)\s=|AmountExceeded\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
-./create-transactions.sh 1 | egrep '"time"'
+./create-transactions.sh 3 | egrep '"time"'
 ```
+Run more times `./create-transactions.sh 3` and check the results.
+
 ### highlights
-- check `AmountExceededConfig`
-- [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
-- [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
-- [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
 - `ProfilesConfig`
     - why `KTable`?
     - `Materialized.as` creates an in-memory store (used by `ReportsConfig`)
-    - `Consumed.as`: using serde defaults (see application.yml)
-    - check SpringBootKstreamsTutorialApplication annotations
+    - `Consumed.as`: using serde defaults (see `application.yml`)
+    - check `SpringBootKstreamsTutorialApplication` annotations
 - `ReportsConfig`
     - why not `KTable`?
     - `Consumed.as`: not using serde defaults
@@ -67,6 +65,9 @@ see http://localhost:9021/clusters
             - outcome (kafka value) could be null
             - Kafka keys could contain business objects too! 
         - `Joined.as` used to configure serde for key and values
+- [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
+- [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
+- [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
 
 ##### error
 ```
