@@ -26,8 +26,9 @@ see http://localhost:9021/clusters
 ```
 
 ### highlights
-- see that both `AmountExceededConfig` and `DailyTotalsConfig` need *transactions* `KStream`
-    - see `ExceedsConfig` for *transactions* `KStream` declaration
+- check `AmountExceededConfig` and `DailyTotalsConfig`
+    - both need *transactions* `KStream`
+    - check `ExceedsConfig` for *transactions* `KStream` declaration
 - *txGroupedByClientId* is using a custom *peek* implementation
     - see `it.context` usage
     - one could use `it.context.offset` to implement a [fencing token](http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) 
