@@ -67,6 +67,8 @@ public class DailyTotalsConfig extends AbstractExceeds {
 
 	/**
 	 * group transactions by client-id
+	 *
+	 * topic:transactions -> GROUP BY transaction-key
 	 */
 	private KGroupedStream<String, Transaction> txGroupedByClientId(
 			KStreamEx<String, Transaction> transactions) {
