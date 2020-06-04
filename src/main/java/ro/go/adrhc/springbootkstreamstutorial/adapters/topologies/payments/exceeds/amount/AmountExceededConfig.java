@@ -25,6 +25,10 @@ public class AmountExceededConfig {
 
 	public AmountExceededConfig(TopicsProperties topicsProperties) {this.topicsProperties = topicsProperties;}
 
+	/**
+	 * transactions (KStream) join client-profiles (KTable)
+	 * client-profiles: [clientId1, ClientProfile1-v1]
+	 */
 	@Bean
 	public KStream<String, Transaction> transactions(StreamsBuilder pStreamsBuilder,
 			KTable<String, ClientProfile> clientProfileTable) {

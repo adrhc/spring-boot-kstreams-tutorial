@@ -22,6 +22,23 @@ public class ProfilesConfig {
 
 	/**
 	 * Used by ExceedsConfig too.
+	 *
+	 * KTable(client-profiles)
+	 * 
+	 * [clientId1, ClientProfile1-v1]
+	 * [clientId1, ClientProfile1-v2]
+	 * [clientId1, ClientProfile1-v3] -> last value
+	 *
+	 * KStream(transactions) - join - KTable(client-profiles)
+	 * [txId, transaction-clientId1] join last client-profiles value
+	 * [txId, transaction-clientId1] join last client-profiles value
+	 *
+	 * KStream(transactions) - join - KStream(client-profiles)
+	 * time period: e.g. 1d
+	 * [txId, transaction-clientId1] join last ClientProfile1-v1 value
+	 * [txId, transaction-clientId1] join last ClientProfile1-v2 value
+	 *
+	 * client-profiles: key and value
 	 */
 	@Bean
 	public KTable<String, ClientProfile> clientProfileTable(StreamsBuilder streamsBuilder) {
@@ -30,6 +47,15 @@ public class ProfilesConfig {
 				Materialized.as(topicsProperties.getClientProfiles() + "-store"));
 	}
 
+	/**
+	 * KStream(client-profiles)
+	 *
+	 * [clientId1, ClientProfile1-v1] -> business logic called
+	 * [clientId1, ClientProfile1-v2] -> business logic called
+	 * [clientId1, ClientProfile1-v3] -> business logic called
+	 *
+	 * Kafka broker (client-profiles) -> clientProfileTable -> foreach
+	 */
 	@Bean
 	public KStream<String, ClientProfile> profiles(StreamsBuilder streamsBuilder) {
 		KTable<String, ClientProfile> clientProfileTable = clientProfileTable(streamsBuilder);
