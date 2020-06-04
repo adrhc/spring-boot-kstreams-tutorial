@@ -26,10 +26,6 @@ see http://localhost:9021/clusters
 Run more times `./create-transactions.sh 3` and check the results.
 
 ### highlights
-- check `AmountExceededConfig`
-- [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
-- [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
-- [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
 - `ProfilesConfig`
     - why `KTable`?
     - `Materialized.as` creates an in-memory store (used by `ReportsConfig`)
@@ -47,6 +43,9 @@ Run more times `./create-transactions.sh 3` and check the results.
             - outcome (kafka value) could be null
             - Kafka keys could contain business objects too! 
         - `Joined.as` used to configure serde for key and values
+- [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
+- [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
+- [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
 
 ##### error
 ```
