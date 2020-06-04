@@ -99,7 +99,8 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - notice `@EnableConfigurationProperties`, `Thread.sleep(Long.MAX_VALUE)`
 - notice `Command implements Serializable`
 - class `TopicsConfig`: enables topic creation
-- `infrastructure` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+- `infrastructure`: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+- `adapters`: see [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 # feature/1-init
 - check Spring Initializr.png
