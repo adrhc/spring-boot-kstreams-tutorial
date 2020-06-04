@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
@@ -14,8 +14,8 @@ import ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx;
 import ro.go.adrhc.kafkastreamsextensions.streams.kstream.KStreamEx;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
 
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 

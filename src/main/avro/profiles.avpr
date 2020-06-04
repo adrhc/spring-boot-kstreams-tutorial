@@ -1,5 +1,5 @@
 {
-  "namespace": "ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages",
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages",
   "protocol": "ProfilesProtocol",
   "doc": "profiles protocol",
   "types": [

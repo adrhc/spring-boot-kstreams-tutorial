@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.amount;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.amount;
 
 import lombok.*;
 
