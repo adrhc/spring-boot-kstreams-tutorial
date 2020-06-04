@@ -14,7 +14,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.ProducerListener;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
 
 import java.util.Map;
 

@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -905002886658350146L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ClientProfile\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"periodMaxAmount\",\"type\":\"int\"}]}");
+  private static final long serialVersionUID = 1964678165072336845L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ClientProfile\",\"namespace\":\"ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"surname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"phone\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"dailyMaxAmount\",\"type\":\"int\"},{\"name\":\"periodMaxAmount\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -260,8 +260,8 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new ClientProfile RecordBuilder.
    * @return A new ClientProfile RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder newBuilder() {
-    return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder();
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder newBuilder() {
+    return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder();
   }
 
   /**
@@ -269,11 +269,11 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new ClientProfile RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder(other);
     }
   }
 
@@ -282,11 +282,11 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new ClientProfile RecordBuilder
    */
-  public static ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile other) {
+  public static ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder newBuilder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile other) {
     if (other == null) {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder();
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder();
     } else {
-      return new ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder(other);
+      return new ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder(other);
     }
   }
 
@@ -314,7 +314,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -350,7 +350,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing ClientProfile instance
      * @param other The existing instance to copy.
      */
-    private Builder(ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile other) {
+    private Builder(ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -396,7 +396,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setId(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -416,7 +416,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearId() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -436,7 +436,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setName(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setName(java.lang.String value) {
       validate(fields()[1], value);
       this.name = value;
       fieldSetFlags()[1] = true;
@@ -456,7 +456,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearName() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearName() {
       name = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -476,7 +476,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'surname'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setSurname(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setSurname(java.lang.String value) {
       validate(fields()[2], value);
       this.surname = value;
       fieldSetFlags()[2] = true;
@@ -496,7 +496,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'surname' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearSurname() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearSurname() {
       surname = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -516,7 +516,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setEmail(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setEmail(java.lang.String value) {
       validate(fields()[3], value);
       this.email = value;
       fieldSetFlags()[3] = true;
@@ -536,7 +536,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearEmail() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearEmail() {
       email = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -556,7 +556,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'phone'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setPhone(java.lang.String value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setPhone(java.lang.String value) {
       validate(fields()[4], value);
       this.phone = value;
       fieldSetFlags()[4] = true;
@@ -576,7 +576,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'phone' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearPhone() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearPhone() {
       phone = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -596,7 +596,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'dailyMaxAmount'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setDailyMaxAmount(int value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setDailyMaxAmount(int value) {
       validate(fields()[5], value);
       this.dailyMaxAmount = value;
       fieldSetFlags()[5] = true;
@@ -616,7 +616,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'dailyMaxAmount' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearDailyMaxAmount() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearDailyMaxAmount() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -635,7 +635,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'periodMaxAmount'.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder setPeriodMaxAmount(int value) {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder setPeriodMaxAmount(int value) {
       validate(fields()[6], value);
       this.periodMaxAmount = value;
       fieldSetFlags()[6] = true;
@@ -655,7 +655,7 @@ public class ClientProfile extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'periodMaxAmount' field.
       * @return This builder.
       */
-    public ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.profiles.messages.ClientProfile.Builder clearPeriodMaxAmount() {
+    public ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile.Builder clearPeriodMaxAmount() {
       fieldSetFlags()[6] = false;
       return this;
     }
