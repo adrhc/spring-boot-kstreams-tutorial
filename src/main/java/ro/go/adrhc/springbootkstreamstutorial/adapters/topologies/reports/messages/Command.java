@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages;
 
 import lombok.Getter;
 import lombok.Setter;
