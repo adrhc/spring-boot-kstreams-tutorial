@@ -1,5 +1,5 @@
 {
-  "namespace": "ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.exceeds.daily.messages",
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.exceeds.daily.messages",
   "protocol": "DailyExceedsProtocol",
   "doc": "daily exceeds protocol",
   "types": [

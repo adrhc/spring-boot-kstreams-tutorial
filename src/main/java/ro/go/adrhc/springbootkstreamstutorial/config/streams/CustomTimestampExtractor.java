@@ -3,7 +3,7 @@ package ro.go.adrhc.springbootkstreamstutorial.config.streams;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.streams.processor.TimestampExtractor;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.payments.messages.Transaction;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.payments.messages.Transaction;
 
 import java.util.Map;
 import java.util.Optional;

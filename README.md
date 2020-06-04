@@ -104,7 +104,7 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.client-pro
 
 ##### error
 ```
-InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+InvalidDefinitionException: Cannot construct instance of `ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
 ```             
 **solution:** use `@NoArgsConstructor` on `Command`
 
