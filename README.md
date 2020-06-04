@@ -29,8 +29,8 @@ Run more times `./create-transactions.sh 3` and check the results.
 - `ProfilesConfig`
     - why `KTable`?
     - `Materialized.as` creates an in-memory store (used by `ReportsConfig`)
-    - `Consumed.as`: using serde defaults (see application.yml)
-    - check SpringBootKstreamsTutorialApplication annotations
+    - `Consumed.as`: using serde defaults (see `application.yml`)
+    - check `SpringBootKstreamsTutorialApplication` annotations
 - `ReportsConfig`
     - why not `KTable`?
     - `Consumed.as`: not using serde defaults
