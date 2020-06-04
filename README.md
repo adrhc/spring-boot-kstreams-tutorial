@@ -44,6 +44,8 @@ see http://localhost:9021/clusters
 ./create-command.sh daily | grep 'Command('
 ./create-transactions.sh 33 | egrep '"time"'
 ```
+
+### highlights
 - check {"dailyMaxAmount":...} occurrences
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
