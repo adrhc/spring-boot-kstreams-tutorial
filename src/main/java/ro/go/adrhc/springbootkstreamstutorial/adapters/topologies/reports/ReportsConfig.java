@@ -1,4 +1,4 @@
-package ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports;
+package ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.kafka.support.serializer.JsonSerde;
 import ro.go.adrhc.springbootkstreamstutorial.config.AppProperties;
 import ro.go.adrhc.springbootkstreamstutorial.config.TopicsProperties;
-import ro.go.adrhc.springbootkstreamstutorial.infrastructure.topologies.reports.messages.Command;
+import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.reports.messages.Command;
 
 @Configuration
 @Profile("!test")
