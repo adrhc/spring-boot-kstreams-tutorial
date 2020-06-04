@@ -1,0 +1,79 @@
+app:
+  version: v2
+  daily-grace: 5
+  currency: EURO
+schema:
+  registry:
+    url: http://localhost:8081
+spring:
+  application:
+    name: sbkst
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      client-id: ${spring.application.name}-consumer-clientId
+      group-id: ${spring.application.name}-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.ByteBufferDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      isolation-level: read_committed
+    producer:
+      client-id: ${spring.application.name}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema:
+          registry:
+            url: ${schema.registry.url}
+    streams:
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      client-id: ${spring.application.name}-streamsClientId
+      auto-startup: true
+      properties:
+        schema:
+          registry:
+            url: ${schema.registry.url}
+        default:
+          timestamp:
+            extractor: ro.go.adrhc.springbootkstreamstutorial.config.streams.CustomTimestampExtractor
+          key:
+            serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          value:
+            serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          windowed:
+            key:
+              serde:
+                inner: org.apache.kafka.common.serialization.Serdes$StringSerde
+            value:
+              serde:
+                inner: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          deserialization:
+            exception:
+              handler: org.apache.kafka.streams.errors.LogAndContinueExceptionHandler
+        num:
+          stream:
+            threads: 4
+        topology:
+          optimization: all
+        processing:
+          guarantee: exactly_once
+topic:
+  prefix: ${spring.application.name}
+  commands: ${topic.prefix}.commands.${app.version}
+  client-profiles: ${topic.prefix}.client-profiles.${app.version}
+  transactions: ${topic.prefix}.transactions.${app.version}
+  daily-total-spent: ${topic.prefix}.daily-total-spent.${app.version}
+  daily-exceeds: ${topic.prefix}.daily-exceeds.${app.version}
+logging:
+  level:
+    ro:
+      go:
+        adrhc: debug
+    org:
+      springframework:
+        kafka:
+          config:
+            StreamsBuilderFactoryBean: debug
+          listener: info
+      apache:
+        kafka: info

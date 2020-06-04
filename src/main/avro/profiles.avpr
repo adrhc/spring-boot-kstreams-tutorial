@@ -1,0 +1,46 @@
+{
+  "namespace": "ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages",
+  "protocol": "ProfilesProtocol",
+  "doc": "profiles protocol",
+  "types": [
+	{
+	  "name": "ClientProfile",
+	  "type": "record",
+	  "fields": [
+		{
+		  "name": "id",
+		  "type": "string"
+		},
+		{
+		  "name": "name",
+		  "type": "string"
+		},
+		{
+		  "name": "surname",
+		  "type": "string"
+		},
+		{
+		  "name": "email",
+		  "type": "string"
+		},
+		{
+		  "name": "phone",
+		  "type": "string"
+		},
+		{
+		  "name": "amountLimit",
+		  "type": "int",
+		  "default" : 5
+		},
+		{
+		  "name": "dailyMaxAmount",
+		  "type": "int"
+		},
+		{
+		  "name": "periodMaxAmount",
+		  "type": "int"
+		}
+	  ]
+	}
+  ]
+}
