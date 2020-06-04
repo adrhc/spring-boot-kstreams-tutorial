@@ -37,15 +37,18 @@ see http://localhost:9021/clusters
     - see [4.6 Message Delivery Semantics](https://kafka.apache.org/documentation/#semantics) for *isolation-level*
 # feature/7/daily-exceeds
 ```bash
-./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|Limit|Notification|Overdue|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
+./run.sh | egrep -i "\"(id|dailyMaxAmount)\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
 ./create-transactions.sh 3 | egrep '"time"'
 ./create-command.sh daily | grep 'Command('
+./create-transactions.sh 33 | egrep '"time"'
 ```
+- check {"dailyMaxAmount":...} occurrences
 - mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 - simplified daily total spent report (see `CommandsConfig`)
 - careful on KTable-KTable joins: for a client-profile update all dailyTotalSpentTable will be joined again!
+    - run `./create-client-profile.sh | egrep '"id"'` again to see the issue 
 
 ### error
 ```
@@ -59,12 +62,22 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected
 ./run.sh | egrep -i "\"id\"|(consumed|Client profiles|Configuration|totals|Transaction):|ERROR[^s]|\s(profiles|version)\s=|(AmountExceeded|Client )\("
 ./create-client-profile.sh | egrep '"id"'
 ./create-command.sh config,profiles | grep 'Command('
-./create-transactions.sh 1 | egrep '"time"'
+./create-transactions.sh 3 | egrep '"time"'
+./create-command.sh daily | grep 'Command('
 ```
-- see that both AmountExceededConfig and DailyExceedsConfig need transactions KStream
-- txGroupedByClientId is using a custom peek implementation
-- CommandsConfig needs only the store of dailyTotalSpent KTable but not the KTable itself
+
+### highlights
+- see that both `AmountExceededConfig` and `DailyTotalsConfig` need *transactions* `KStream`
+    - see `ExceedsConfig` for *transactions* `KStream` declaration
+- *txGroupedByClientId* is using a custom *peek* implementation
+    - see `it.context` usage
+    - one could use `it.context.offset` to implement a [fencing token](http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) 
+- `CommandsConfig` needs only the store of *dailyTotalSpent* `KTable` but not the `KTable` itself!
 - [Windowing](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#windowing)
+- *windowedBy*: it's just *groupBy* some duration
+    - see [Hopping time windows](https://kafka.apache.org/25/images/streams-time-windows-hopping.png)
+    - see [Tumbling time windows](https://kafka.apache.org/25/images/streams-time-windows-tumbling.png)
+- `aggregate`: output data to a `KTable` that's why later we need `toStream()`
 
 # feature/5/joins
 ```bash
@@ -78,6 +91,23 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Expected
 - [Joining](https://kafka.apache.org/25/documentation/streams/developer-guide/dsl-api.html#joining)
 - [Schemas, Subjects, and Topics](https://docs.confluent.io/current/schema-registry/index.html#schemas-subjects-and-topics)
 - [Schema Registry API Reference](https://docs.confluent.io/current/schema-registry/develop/api.html#sr-api-reference)
+- `ProfilesConfig`
+    - why `KTable`?
+    - `Materialized.as` creates an in-memory store (used by `ReportsConfig`)
+    - `Consumed.as`: using serde defaults (see application.yml)
+    - check SpringBootKstreamsTutorialApplication annotations
+- `ReportsConfig`
+    - why not `KTable`?
+    - `Consumed.as`: not using serde defaults
+    - `commands` used with `filter` instead of `branch`
+    - `<ClientProfile>allOf` relates to `Materialized.as` in `ProfilesConfig`
+- `AmountExceededConfig`
+    - `transactionsStream` using serde defaults
+    - `join` with a `KTable` is similar to a sql inner-join
+        - `amountExceededJoiner` is the values (`KStream`, `KTable`) joiner
+            - outcome (kafka value) could be null
+            - Kafka keys could contain business objects too! 
+        - `Joined.as` used to configure serde for key and values
 
 ##### error
 ```
@@ -168,7 +198,8 @@ bin/kafka-console-producer --broker-list 127.0.0.1:9092 --topic sbkst.commands.v
 - notice `@EnableConfigurationProperties`, `Thread.sleep(Long.MAX_VALUE)`
 - notice `Command implements Serializable`
 - class `TopicsConfig`: enables topic creation
-- `adapters` package: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+- `infrastructure`: see [Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+- `adapters`: see [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 # feature/1-init
 - check Spring Initializr.png
