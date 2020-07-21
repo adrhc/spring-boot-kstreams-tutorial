@@ -24,7 +24,7 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 import static ro.go.adrhc.kafkastreamsextensions.streams.StreamsBuilderEx.from;
 import static ro.go.adrhc.springbootkstreamstutorial.util.DateUtils.format;
-import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeOf;
+import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeNameOf;
 
 @Configuration
 @Profile("!test")
@@ -58,11 +58,11 @@ public class CommandsConfig {
 		// clients profiles
 		commands
 				.filter((k, cmd) -> cmd.getNames().contains("profiles"))
-				.<ClientProfile>allValuesOf(storeOf(topicsProperties.getClientProfiles())) // see Materialized.as in ProfilesConfig
+				.<ClientProfile>allValuesOf(storeNameOf(topicsProperties.getClientProfiles())) // see Materialized.as in ProfilesConfig
 				.foreach((k, profiles) -> profiles.forEach(profile -> log.debug("\n\tClient profiles:\n\t\t{}", profile)));
 
 		// daily total spent report
-		String dailyTotalSpentStore = storeOf(topicsProperties.getDailyTotalSpent());
+		String dailyTotalSpentStore = storeNameOf(topicsProperties.getDailyTotalSpent());
 		commands
 				.filter((k, cmd) -> cmd.getNames().contains("daily"))
 				// querying dailyTotalSpentStore to get a List<KeyValue<clientId-day, amount>>
