@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Profile;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.config.TopicsProperties;
 import ro.go.adrhc.springbootkstreamstutorial.adapters.topologies.profiles.messages.ClientProfile;
 
-import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeOf;
-import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.tableOf;
+import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.storeNameOf;
+import static ro.go.adrhc.springbootkstreamstutorial.util.StreamsUtils.tableNameOf;
 
 @Configuration
 @Profile("!test")
@@ -29,8 +29,8 @@ public class ProfilesConfig {
 	@Bean
 	public KTable<String, ClientProfile> clientProfileTable(StreamsBuilder streamsBuilder) {
 		return streamsBuilder.table(topicsProperties.getClientProfiles(),
-				Consumed.as(tableOf(topicsProperties.getClientProfiles())),
-				Materialized.as(storeOf(topicsProperties.getClientProfiles())));
+				Consumed.as(tableNameOf(topicsProperties.getClientProfiles())),
+				Materialized.as(storeNameOf(topicsProperties.getClientProfiles())));
 	}
 
 	@Bean

@@ -75,7 +75,7 @@ public class DailyTotalsConfig extends AbstractExceeds {
 
 	private Produced<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentProducer() {
 		return Produced.<DailyTotalSpentKey, DailyTotalSpent>
-				as(streamOf(topicsProperties.getDailyTotalSpent()))
+				as(streamNameOf(topicsProperties.getDailyTotalSpent()))
 				// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 				.withKeySerde(dailyTotalSpentKeySerde());
 	}
@@ -84,11 +84,11 @@ public class DailyTotalsConfig extends AbstractExceeds {
 	public KTable<DailyTotalSpentKey, DailyTotalSpent> dailyTotalSpentTable(StreamsBuilder streamsBuilder) {
 		return streamsBuilder.table(topicsProperties.getDailyTotalSpent(),
 				Consumed.<DailyTotalSpentKey, DailyTotalSpent>
-						as(tableOf(topicsProperties.getDailyTotalSpent()))
+						as(tableNameOf(topicsProperties.getDailyTotalSpent()))
 						// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 						.withKeySerde(dailyTotalSpentKeySerde()),
 				Materialized.<DailyTotalSpentKey, DailyTotalSpent, KeyValueStore<Bytes, byte[]>>
-						as(storeOf(topicsProperties.getDailyTotalSpent()))
+						as(storeNameOf(topicsProperties.getDailyTotalSpent()))
 						// mixing AVRO (check application.yml for default.value.serde) with Spring's JsonSerde
 						.withKeySerde(dailyTotalSpentKeySerde()));
 	}
